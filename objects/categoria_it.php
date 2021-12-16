@@ -10,7 +10,10 @@ class Categoria_it{
     public $categoria;    
 	public $createddate;
 	public $lastmodified;
-	//public $localita_id;
+	public $lat_min;
+	public $lat_max;
+	public $lng_min;
+	public $lng_max;
 					
   
     // constructor with $db as database connection
@@ -98,6 +101,34 @@ function selectByCitta(){
 //    // set values to object properties
 //    $this->categoria_id = $row['categoria_id'];   
 //	$this->categoria = $row['categoria'];   
+}
+function readbylatlng(){  
+   
+    $query = "SELECT											
+				p.categoria_id,
+				p.categoria
+            FROM
+                " . $this->table_name . " p    
+			LEFT JOIN contatto_it co on co.categoria_id = p.categoria_id			
+            WHERE 
+            (co.latitudine between :latMin AND :latMax) 
+            AND (co.longitudine between :lngMin and :lngMax) 	
+			GROUP BY p.categoria_id
+            ORDER BY p.categoria";
+    
+    // prepare query statement
+    $stmt = $this->conn->prepare( $query );
+  
+    // bind id of product to be updated
+    $stmt->bindParam(":latMin", $this->lat_min);
+    $stmt->bindParam(":latMax", $this->lat_max);
+    $stmt->bindParam(":lngMin", $this->lng_min);
+    $stmt->bindParam(":lngMax", $this->lng_max);
+  
+    // execute query
+    $stmt->execute();
+  
+	return $stmt;
 }
 function create(){
   
