@@ -54,6 +54,7 @@ if($num>0){
 			"internet" => $internet,
 			"latitudine" => $latitudine,
 			"longitudine" => $longitudine,
+            "immagine" => $immagine,
 			"dataiscrizione" => $dataiscrizione,
 			"vers" => $vers,
 			"so" => $so,

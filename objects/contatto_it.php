@@ -22,6 +22,7 @@ class Contatto_it{
 	public $internet;
 	public $latitudine;
 	public $longitudine;
+	public $immagine;
 	public $dataiscrizione;
 	public $vers;
 	public $so;
@@ -38,12 +39,12 @@ class Contatto_it{
 	public $lat_max;
 	public $lng_min;
 	public $lng_max;
+
   
     // constructor with $db as database connection
     public function __construct($db){
         $this->conn = $db;
-    }
-	// read products
+    }	
 function read(){
   
     // select all query
@@ -64,6 +65,7 @@ function read(){
 				p.internet,
 				p.latitudine,
 				p.longitudine,
+				p.immagine,
 				p.dataiscrizione,
 				p.vers,
 				p.so,
@@ -116,6 +118,7 @@ function readOne(){
 				p.internet,
 				p.latitudine,
 				p.longitudine,
+				p.immagine,
 				p.dataiscrizione,
 				p.vers,
 				p.so,
@@ -170,6 +173,7 @@ function readOne(){
 	 $this->internet= $row['internet'];
 	 $this->latitudine= $row['latitudine'];
 	 $this->longitudine= $row['longitudine'];
+	 $this->immagine= $row['immagine'];
 	 $this->dataiscrizione= $row['dataiscrizione'];
 	 $this->vers= $row['vers'];
 	 $this->so= $row['so'];
@@ -208,6 +212,7 @@ function readSelected(){
 				p.internet,
 				p.latitudine,
 				p.longitudine,
+				p.immagine,
 				p.dataiscrizione,
 				p.vers,
 				p.so,
@@ -271,6 +276,7 @@ function readByLatLng(){
 				p.internet,
 				p.latitudine,
 				p.longitudine,
+				p.immagine,
 				p.dataiscrizione,
 				p.vers,
 				p.so,
@@ -291,10 +297,8 @@ function readByLatLng(){
     $query =$query . $queryCategorie;
   
     // prepare query statement
-    $stmt = $this->conn->prepare( $query );
-  
-   
-//	$stmt->bindParam(":cat_id", $this->cat_Id);	
+    $stmt = $this->conn->prepare( $query );  
+
 	 $stmt->bindParam(":latMin", $this->lat_min);
 	 $stmt->bindParam(":latMax", $this->lat_max);
 	 $stmt->bindParam(":lngMin", $this->lng_min);
@@ -326,6 +330,7 @@ function create(){
 				internet=:internet,
 				latitudine=:latitudine,
 				longitudine=:longitudine,
+				immagine=:immagine,
 				dataiscrizione=:dataiscrizione,
 				vers=:vers,
 				ndr=:ndr,
@@ -355,6 +360,7 @@ function create(){
 	$stmt->bindParam(":internet", $this->internet);
 	$stmt->bindParam(":latitudine", $this->latitudine);
 	$stmt->bindParam(":longitudine", $this->longitudine);
+	$stmt->bindParam(":immagine", $this->immagine);
 	$stmt->bindParam(":dataiscrizione", $this->dataiscrizione);
 	$stmt->bindParam(":vers", $this->vers);
 	$stmt->bindParam(":ndr", $this->ndr);
@@ -387,6 +393,7 @@ function update(){
 				internet=:internet,
 				latitudine=:latitudine,
 				longitudine=:longitudine,
+				immagine=IF(LENGTH(:immagine) > 10 ,:immagine,immagine),
 				vers=:vers,
 				ndr=:ndr,
 				so=:so
@@ -415,6 +422,7 @@ function update(){
 	$stmt->bindParam(":internet", $this->internet);
 	$stmt->bindParam(":latitudine", $this->latitudine);
 	$stmt->bindParam(":longitudine", $this->longitudine);
+	$stmt->bindParam(":immagine", $this->immagine);
 	$stmt->bindParam(":vers", $this->vers);
 	$stmt->bindParam(":ndr", $this->ndr);
 	$stmt->bindParam(":so", $this->so);   

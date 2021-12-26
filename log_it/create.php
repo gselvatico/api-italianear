@@ -28,13 +28,10 @@ if( !empty($data->userID)
     $log_it->userID=$data->userID;
     $log_it->gps=$data->gps;
     $log_it->lista_categorie=$data->lista_categorie;
-    $log_it->localita_id=$data->localita_id;
+    $log_it->ricerca_gps=$data->ricerca_gps;
     $log_it->lista_contatti=$data->lista_contatti;
-    // $log_it->tipo_utente=$data->tipo_utente;
     $log_it->vers=$data->vers;
     $log_it->so=$data->so;
-    // $log_it->ndr=$data->ndr;
-
   
     // create the log_it
     if($log_it->create()){

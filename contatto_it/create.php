@@ -25,22 +25,6 @@ if (
 	!empty($data->userID) &&
 	!empty($data->email) &&
 	!empty($data->nome) &&
-	// !empty($data->categoria_id) &&
-	// !empty($data->nome_negozio) &&
-	// !empty($data->localita_id) &&
-	// !empty($data->indirizzo) &&
-	// !empty($data->telefono) &&
-	// !empty($data->email_c) &&
-	// !empty($data->ruolo) &&
-	// !empty($data->note) &&
-	// !empty($data->nomecontatto) &&
-	// !empty($data->internet) &&
-	// !empty($data->latitudine) &&
-	// !empty($data->longitudine) &&
-	// !empty($data->dataiscrizione) &&
-	//!empty($data->vers) &&
-	//!empty($data->so) &&
-	//!empty($data->ndr) &&
 	!empty($data->createddate)
 ) { // set contatto_it property values
 	$contatto_it->userID = $data->userID;
@@ -58,6 +42,7 @@ if (
 	$contatto_it->internet = $data->internet;
 	$contatto_it->latitudine = $data->latitudine;
 	$contatto_it->longitudine = $data->longitudine;
+	$contatto_it->immagine = $data->immagine;
 	$contatto_it->dataiscrizione = $data->dataiscrizione;
 	$contatto_it->vers = $data->vers;
 	$contatto_it->so = $data->so;

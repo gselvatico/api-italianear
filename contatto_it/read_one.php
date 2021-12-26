@@ -41,6 +41,7 @@ if($contatto_it->contatto_id!=null){
 			"internet" =>$contatto_it->internet,
 			"latitudine" =>$contatto_it->latitudine,
 			"longitudine" =>$contatto_it->longitudine,
+			"immagine" =>$contatto_it->immagine,
 			"dataiscrizione" =>$contatto_it->dataiscrizione,
 			"vers" =>$contatto_it->vers,
 			"so" =>$contatto_it->so,
@@ -50,7 +51,7 @@ if($contatto_it->contatto_id!=null){
 			"categoria" =>$contatto_it->categoria,
 			"localita" =>$contatto_it->localita,
 			"nazione" =>$contatto_it->nazione,
-			"prefisso" =>$contatto_it->prefisso
+			"prefisso" =>$contatto_it->prefisso			
         );
   
     // set response code - 200 OK

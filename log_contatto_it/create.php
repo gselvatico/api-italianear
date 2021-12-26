@@ -21,7 +21,7 @@ $log_contatto_it = new Log_contatto_it($db);
 $data = json_decode(file_get_contents("php://input"));
   
 // make sure data is not empty
-if( !empty($data->userID) 	
+if( !empty($data->utente_id) 	
 )
 { // set log_contatto_it property values
 

@@ -10,7 +10,7 @@ class Log_it{
     public $userID;
     public $gps;
     public $lista_categorie;
-    public $localita_id;
+    public $ricerca_gps;
     public $lista_contatti;
     public $tipo_utente;
     public $vers;
@@ -31,7 +31,7 @@ function read(){
                 p.userID,
                 p.gps,
                 p.lista_categorie,
-                p.localita_id,
+                p.ricerca_gps,
                 p.lista_contatti,
                 p.tipo_utente,
                 p.vers,
@@ -58,7 +58,7 @@ function create(){
             userID=:userID,
             gps=:gps,
             lista_categorie=:lista_categorie,
-            localita_id=:localita_id,
+            ricerca_gps=:ricerca_gps,
             lista_contatti=:lista_contatti,          
             vers=:vers,
             so=:so";
@@ -70,7 +70,7 @@ function create(){
 	$stmt->bindParam(":userID", $this->userID);	
 	$stmt->bindParam(":gps", $this->gps);	
 	$stmt->bindParam(":lista_categorie", $this->lista_categorie);	
-    $stmt->bindParam(":localita_id", $this->localita_id);	
+    $stmt->bindParam(":ricerca_gps", $this->ricerca_gps);	
     $stmt->bindParam(":lista_contatti", $this->lista_contatti);	
   //  $stmt->bindParam(":tipo_utente", $this->tipo_utente);	
     $stmt->bindParam(":vers", $this->vers);	
