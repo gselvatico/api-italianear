@@ -8,6 +8,7 @@ class Nazione_it{
     // object properties
     public $nazione_id;
     public $nazione;    
+    public $iso;
 	public $prefisso;    
 	public $flag;    
 	public $createddate;
@@ -25,6 +26,7 @@ function read(){
     $query = "SELECT								
 				p.nazione_id,				
 				p.nazione,		
+                p.iso,
 				p.flag,
 				p.prefisso,
 				p.createddate,
@@ -47,7 +49,8 @@ function readActive(){
     // select all query
     $query = "SELECT								
 				p.nazione_id,				
-				p.nazione,		
+				p.nazione,	
+                p.iso,	
 				p.flag,
 				p.prefisso,
 				p.createddate,
@@ -74,7 +77,8 @@ function create(){
     $query = "INSERT INTO
                 " . $this->table_name . "
             SET               
-				nazione=:nazione,				
+				nazione=:nazione,	
+                iso=:iso,			
 				prefisso=:prefisso,
 				flag=:flag,
 				createddate=:createddate";
@@ -88,7 +92,8 @@ function create(){
   
     // bind values
 	
-	$stmt->bindParam(":nazione", $this->nazione);		
+	$stmt->bindParam(":nazione", $this->nazione);	
+    $stmt->bindParam(":iso", $this->iso);		
 	$stmt->bindParam(":prefisso", $this->prefisso);		
 	$stmt->bindParam(":flag", $this->flag);		
 	$stmt->bindParam(":createddate", $this->createddate);	
@@ -105,7 +110,8 @@ function findByName(){
         // select all query
         $query = "SELECT								
                     p.nazione_id,				
-                    p.nazione,		
+                    p.nazione,	
+                    p.iso,	
                     p.flag,
                     p.prefisso,
                     p.createddate,
@@ -126,6 +132,7 @@ function findByName(){
     // set values to object properties
     $this->nazione_id= $row['nazione_id'];
 	 $this->nazione= $row['nazione'];
+     $this->iso= $row['iso'];
      $this->prefisso= $row['prefisso'];
 	 $this->flag= $row['flag'];	
 	 $this->createddate= $row['createddate'];

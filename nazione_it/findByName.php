@@ -28,6 +28,7 @@ if($nazione_it->nazione_id!=null){
    $nazione_arr=array(
             "nazione_id" =>$nazione_it->nazione_id,
             "nazione" =>$nazione_it->nazione,
+            "iso" =>$nazione_it->iso,
             "prefisso" =>$nazione_it->prefisso,           
 			"createddate" =>$nazione_it->createddate,
 			"lastmodified" =>$nazione_it->lastmodified,			

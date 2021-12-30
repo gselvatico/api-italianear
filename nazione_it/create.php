@@ -27,6 +27,7 @@ if( !empty($data->nazione) &&
 )
 { // set nazione_it property values
 	$nazione_it->nazione= $data->nazione;	
+    $nazione_it->iso= $data->iso;
 	$nazione_it->prefisso= $data->prefisso;
 	$nazione_it->flag= $data->flag;
 	$nazione_it->createddate = date('Y-m-d H:i:s');

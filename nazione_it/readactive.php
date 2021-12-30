@@ -39,7 +39,8 @@ if($num>0){
   
         $nazione_it_item=array(    
 			"nazione_id" => $nazione_id,
-			"nazione" => $nazione,	
+			"nazione" => $nazione,
+            "iso" => $iso,
 			"prefisso" => $prefisso,   			
 			"createddate" => $createddate,
 			"lastmodified" => $lastmodified					
