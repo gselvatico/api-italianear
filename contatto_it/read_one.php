@@ -51,6 +51,7 @@ if($contatto_it->contatto_id!=null){
 			"categoria" =>$contatto_it->categoria,
 			"localita" =>$contatto_it->localita,
 			"nazione" =>$contatto_it->nazione,
+			"nazioneiso" =>$contatto_it->nazioneiso,
 			"prefisso" =>$contatto_it->prefisso			
         );
   

@@ -73,6 +73,7 @@ if($num>0){
 			"categoria" => $categoria,
 			"localita" => $localita,
 			"nazione" => $nazione,
+            "nazioneiso" => $nazioneiso,
             "prefisso" => $prefisso
         );
   

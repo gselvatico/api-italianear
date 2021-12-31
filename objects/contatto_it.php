@@ -58,6 +58,7 @@ function read(){
 				p.nome_negozio,
 				p.localita_id,
 				p.indirizzo,
+				p.nazioneiso,
 				p.telefono,
 				p.email_c,
 				p.ruolo,
@@ -111,6 +112,7 @@ function readOne(){
 				p.nome_negozio,
 				p.localita_id,
 				p.indirizzo,
+				p.nazioneiso,
 				p.telefono,
 				p.email_c,
 				p.ruolo,
@@ -184,6 +186,7 @@ function readOne(){
 	 $this->categoria= $row['categoria'];	
 	 $this->localita= $row['localita'];	
 	 $this->nazione= $row['nazione'];	
+	 $this->nazioneiso= $row['nazioneiso'];	
 	 $this->prefisso= $row['prefisso'];	
 	}
 }
@@ -205,6 +208,7 @@ function readSelected(){
 				p.nome_negozio,
 				p.localita_id,
 				p.indirizzo,
+				p.nazioneiso,
 				p.telefono,
 				p.email_c,
 				p.ruolo,
@@ -269,6 +273,7 @@ function readByLatLng(){
 				p.nome_negozio,
 				p.localita_id,
 				p.indirizzo,
+				p.nazioneiso,
 				p.telefono,
 				p.email_c,
 				p.ruolo,
@@ -328,6 +333,7 @@ function create(){
 				nome_negozio=:nome_negozio,
 				localita_id=:localita_id,
 				indirizzo=:indirizzo,
+				nazioneiso =:nazioneiso,
 				telefono=:telefono,
 				email_c=:email_c,
 				ruolo=:ruolo,
@@ -336,6 +342,7 @@ function create(){
 				internet=:internet,
 				latitudine=:latitudine,
 				longitudine=:longitudine,
+				nazioneiso=:nazioneiso,
 				immagine=:immagine,
 				dataiscrizione=:dataiscrizione,
 				vers=:vers,
@@ -358,6 +365,7 @@ function create(){
 	$stmt->bindParam(":nome_negozio", $this->nome_negozio);
 	$stmt->bindParam(":localita_id", $this->localita_id);
 	$stmt->bindParam(":indirizzo", $this->indirizzo);
+	$stmt->bindParam(":nazioneiso", $this->nazioneiso);
 	$stmt->bindParam(":telefono", $this->telefono);
 	$stmt->bindParam(":email_c", $this->email_c);
 	$stmt->bindParam(":ruolo", $this->ruolo);
@@ -399,6 +407,7 @@ function update(){
 				internet=:internet,
 				latitudine=:latitudine,
 				longitudine=:longitudine,
+				nazioneiso=:nazioneiso,
 				immagine=IF(LENGTH(:immagine) > 10 ,:immagine,immagine),
 				vers=:vers,
 				ndr=:ndr,
@@ -428,6 +437,7 @@ function update(){
 	$stmt->bindParam(":internet", $this->internet);
 	$stmt->bindParam(":latitudine", $this->latitudine);
 	$stmt->bindParam(":longitudine", $this->longitudine);
+	$stmt->bindParam(":nazioneiso", $this->nazioneiso);
 	$stmt->bindParam(":immagine", $this->immagine);
 	$stmt->bindParam(":vers", $this->vers);
 	$stmt->bindParam(":ndr", $this->ndr);

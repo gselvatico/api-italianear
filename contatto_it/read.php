@@ -62,6 +62,7 @@ if($num>0){
 			"createddate" => $createddate,
 			"lastmodified" => $lastmodified,				
 			"categoria" => $categoria,
+            "nazioneiso" => $nazioneiso,
             "prefisso" => $prefisso
         );
   
