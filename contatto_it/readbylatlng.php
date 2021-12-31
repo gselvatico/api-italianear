@@ -66,17 +66,18 @@ if($num>0){
 			"nomecontatto" => $nomecontatto,
 			"internet" => $internet,
 			"latitudine" => $latitudine,
-			"longitudine" => $longitudine,		
+			"longitudine" => $longitudine,	
+            "nazioneiso"=> $nazioneiso,	
             "immagine" => $immagine,	
 			"vers" => $vers,
 			"so" => $so,
 			"ndr" => $ndr,
 			"createddate" => $createddate,
 			"lastmodified" => $lastmodified,      			
-			"categoria" => $categoria
+			"categoria" => $categoria,
 			// "localita" => $localita,
-			// "nazione" => $nazione,
-            // "prefisso" => $prefisso
+			"nazione" => $nazione,
+            "prefisso" => $prefisso
         );
   
         array_push($contatto_its_arr["records"], $contatto_it_item);

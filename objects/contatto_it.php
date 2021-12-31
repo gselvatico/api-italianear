@@ -22,6 +22,7 @@ class Contatto_it{
 	public $internet;
 	public $latitudine;
 	public $longitudine;
+	public $nazioneiso;
 	public $immagine;
 	public $dataiscrizione;
 	public $vers;
@@ -276,6 +277,7 @@ function readByLatLng(){
 				p.internet,
 				p.latitudine,
 				p.longitudine,
+				p.nazioneiso,
 				p.immagine,
 				p.dataiscrizione,
 				p.vers,
@@ -283,12 +285,16 @@ function readByLatLng(){
 				p.ndr,
 				p.createddate,
 				p.lastmodified,
-				c.categoria				
+				c.categoria,
+				n.nazione,
+				n.prefisso		
             FROM
                 " . $this->table_name . " p 
                 LEFT JOIN
                     categoria_it c
-                        ON p.categoria_id = c.categoria_id				
+                        ON p.categoria_id = c.categoria_id
+				LEFT JOIN nazione_it n
+						ON 	n.iso=p.nazioneiso
              WHERE 
 		 	    (p.latitudine between :latMin AND :latMax) 
 		 		AND (p.longitudine between :lngMin and :lngMax) " 
