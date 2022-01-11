@@ -7,6 +7,7 @@ class Categoria_it{
   
     // object properties
     public $categoria_id;
+    public $father_id;
     public $categoria;    
 	public $createddate;
 	public $lastmodified;
@@ -25,7 +26,8 @@ function read(){
   
     // select all query
     $query = "SELECT								
-				p.categoria_id,				
+				p.categoria_id,	
+                p.father_id,					
 				p.categoria,
 				p.createddate,
 				p.lastmodified
@@ -47,6 +49,7 @@ function readOne(){
     // query to read single record
     $query = "SELECT											
 				p.categoria,
+                p.father_id,	
 				p.createddate,
 				p.lastmodified
             FROM
@@ -75,6 +78,7 @@ function selectByCitta(){
    
     $query = "SELECT											
 				p.categoria_id,
+                p.father_id,	
 				p.categoria
             FROM
                 " . $this->table_name . " p    
@@ -103,18 +107,19 @@ function selectByCitta(){
 //	$this->categoria = $row['categoria'];   
 }
 function readbylatlng(){  
-   
+    $queryMaster = "";	
     $query = "SELECT											
-				p.categoria_id,
-				p.categoria
+				f.categoria_id,
+                p.father_id,	
+				f.categoria
             FROM
                 " . $this->table_name . " p    
-			LEFT JOIN contatto_it co on co.categoria_id = p.categoria_id			
-            WHERE 
-            (co.latitudine between :latMin AND :latMax) 
-            AND (co.longitudine between :lngMin and :lngMax) 	
-			GROUP BY p.categoria_id
-            ORDER BY p.categoria";
+			LEFT JOIN contatto_it co on co.categoria_id = p.categoria_id
+            INNER JOIN " . $this->table_name . " f on p.father_id =f.categoria_id			
+            WHERE (co.latitudine between :latMin AND :latMax) 
+            AND (co.longitudine between :lngMin and :lngMax) 
+            GROUP BY f.categoria_id
+            ORDER BY f.categoria";
     
     // prepare query statement
     $stmt = $this->conn->prepare( $query );

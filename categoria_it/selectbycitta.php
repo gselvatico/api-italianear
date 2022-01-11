@@ -34,6 +34,7 @@ if($num>0){
   
         $categoria_it_item=array(    
 			"categoria_id" => $categoria_id,
+            "father_id" => $father_id,
 			"categoria" => $categoria
         );  
         array_push($categoria_its_arr["records"], $categoria_it_item);

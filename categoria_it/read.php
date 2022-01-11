@@ -39,7 +39,8 @@ if($num>0){
   
         $categoria_it_item=array(    
 			"categoria_id" => $categoria_id,
-			"categoria" => $categoria,	        	
+            "father_id" => $father_id,
+            "categoria" => $categoria,	        	
 			"createddate" => $createddate,
 			"lastmodified" => $lastmodified					
         );

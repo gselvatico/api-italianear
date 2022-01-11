@@ -31,6 +31,7 @@ class Contatto_it{
 	public $createddate;
 	public $lastmodified;
 	public $categoria;
+	public $father_id;
 	public $localita;
 	public $nazione;
 	public $prefisso;
@@ -75,6 +76,7 @@ function read(){
 				p.createddate,
 				p.lastmodified,
 				c.categoria,
+				c.father_id,
 				l.localita,
 				n.nazione,
 				n.prefisso
@@ -129,6 +131,7 @@ function readOne(){
 				p.createddate,
 				p.lastmodified,
 				c.categoria,
+				c.father_id,
 				l.localita,
 				n.nazione,
 				n.prefisso
@@ -225,6 +228,7 @@ function readSelected(){
 				p.createddate,
 				p.lastmodified,			
 				c.categoria,
+				c.father_id,
 				l.localita,
 				n.nazione,
 				n.prefisso
@@ -259,7 +263,7 @@ function readByLatLng(){
 	$queryCategorie = "";
 
 	if( $this->cat_Id !=1){
-		$queryCategorie = "	AND  p.categoria_id IN ("
+		$queryCategorie = "	AND  c.father_id IN ("
 		. $this->cat_Id .
 		")";
 	} 
@@ -291,6 +295,7 @@ function readByLatLng(){
 				p.createddate,
 				p.lastmodified,
 				c.categoria,
+				c.father_id,
 				n.nazione,
 				n.prefisso		
             FROM

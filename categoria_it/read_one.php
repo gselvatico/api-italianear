@@ -27,6 +27,7 @@ if($categoria_it->categoria!=null){
     // create array
     $categoria_arr = array(
         "categoria_id" =>  $categoria_it->categoria_id,
+        "father_id" =>  $categoria_it->father_id,
         "categoria" => $categoria_it->categoria
     );
   

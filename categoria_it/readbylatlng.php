@@ -39,6 +39,7 @@ if($num>0){
   
         $categoria_it_item=array(    
 			"categoria_id" => $categoria_id,
+            "father_id" => $father_id,
 			"categoria" => $categoria
         );  
         array_push($categoria_its_arr["records"], $categoria_it_item);
@@ -58,7 +59,7 @@ else{
   
     // tell the user no products found
     echo json_encode(
-        array("message" => "No products found.")
+        array("message" => "Nessuna categoria trovata.")
     );
 }
 ?>
