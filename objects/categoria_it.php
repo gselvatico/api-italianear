@@ -9,6 +9,7 @@ class Categoria_it{
     public $categoria_id;
     public $father_id;
     public $categoria;    
+    public $ncontatti;    
 	public $createddate;
 	public $lastmodified;
 	public $lat_min;
@@ -111,7 +112,8 @@ function readbylatlng(){
     $query = "SELECT											
 				f.categoria_id,
                 p.father_id,	
-				f.categoria
+				f.categoria,
+                count(co.contatto_id) ncontatti
             FROM
                 " . $this->table_name . " p    
 			LEFT JOIN contatto_it co on co.categoria_id = p.categoria_id
