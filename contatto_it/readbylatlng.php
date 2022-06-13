@@ -75,6 +75,7 @@ if($num>0){
 			"createddate" => $createddate,
 			"lastmodified" => $lastmodified,      			
 			"categoria" => $categoria,
+            "categoria_father" => $categoria_father,
             "father_id" => $father_id,
 			// "localita" => $localita,
 			"nazione" => $nazione,

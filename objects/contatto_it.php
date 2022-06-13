@@ -31,6 +31,7 @@ class Contatto_it{
 	public $createddate;
 	public $lastmodified;
 	public $categoria;
+	public $categoria_father;
 	public $father_id;
 	public $localita;
 	public $nazione;
@@ -296,6 +297,7 @@ function readByLatLng(){
 				p.lastmodified,
 				c.categoria,
 				c.father_id,
+				f.categoria As categoria_father,
 				n.nazione,
 				n.prefisso		
             FROM
@@ -304,7 +306,9 @@ function readByLatLng(){
                     categoria_it c
                         ON p.categoria_id = c.categoria_id
 				LEFT JOIN nazione_it n
-						ON 	n.iso=p.nazioneiso
+						ON n.iso=p.nazioneiso
+				INNER JOIN categoria_it f 
+						ON c.father_id =f.categoria_id	
              WHERE 
 		 	    (p.latitudine between :latMin AND :latMax) 
 		 		AND (p.longitudine between :lngMin and :lngMax) " 
