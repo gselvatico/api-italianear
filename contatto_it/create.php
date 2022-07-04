@@ -42,8 +42,8 @@ if (
 	$contatto_it->internet = $data->internet;
 	$contatto_it->latitudine = $data->latitudine;
 	$contatto_it->longitudine = $data->longitudine;
-	$contatto_it->immagine = $data->nazioneiso;
-	$contatto_it->nazioneiso = $data->immagine;
+	$contatto_it->immagine = $data->immagine;
+	$contatto_it->nazioneiso = $data->nazioneiso;
 	$contatto_it->dataiscrizione = $data->dataiscrizione;
 	$contatto_it->vers = $data->vers;
 	$contatto_it->so = $data->so;

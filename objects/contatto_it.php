@@ -287,7 +287,6 @@ function readByLatLng(){
 				p.internet,
 				p.latitudine,
 				p.longitudine,
-				p.nazioneiso,
 				p.immagine,
 				p.dataiscrizione,
 				p.vers,
@@ -351,7 +350,6 @@ function create(){
 				internet=:internet,
 				latitudine=:latitudine,
 				longitudine=:longitudine,
-				nazioneiso=:nazioneiso,
 				immagine=:immagine,
 				dataiscrizione=:dataiscrizione,
 				vers=:vers,
@@ -396,7 +394,7 @@ function create(){
         return $last_id;
     }
   
-    return false;      
+    return "errore" + $stmt;      
 }
 function update(){  
     // update query
