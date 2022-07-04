@@ -53,6 +53,7 @@ if($num>0){
             "email" => html_entity_decode($email),
             "nome_negozio" => $nome_negozio,
 			"categoria_id" => $categoria_id,
+            "father_id" => $father_id,
 			"dataiscrizione" => $dataiscrizione,	
         	"localita_id" => $localita_id,
 			"indirizzo" => $indirizzo,
