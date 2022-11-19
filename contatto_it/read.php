@@ -44,7 +44,7 @@ if($num>0){
             "nome_negozio" => $nome_negozio,
 			"categoria_id" => $categoria_id,
 			"dataiscrizione" => $dataiscrizione,	
-        	"localita_id" => $localita_id,
+        	"localita" => $localita,
 			"indirizzo" => $indirizzo,
 			"telefono" => $telefono,
 			"email_c" => $email_c,

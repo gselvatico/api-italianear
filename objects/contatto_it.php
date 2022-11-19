@@ -12,7 +12,6 @@ class Contatto_it{
     public $nome;
     public $categoria_id;
     public $nome_negozio;
-    public $localita_id;
     public $indirizzo;
 	public $telefono;
 	public $email_c;
@@ -58,8 +57,8 @@ function read(){
 				p.nome,
 				p.categoria_id,				
 				p.nome_negozio,
-				p.localita_id,
 				p.indirizzo,
+				p.localita,
 				p.nazioneiso,
 				p.telefono,
 				p.email_c,
@@ -77,21 +76,17 @@ function read(){
 				p.createddate,
 				p.lastmodified,
 				c.categoria,
-				c.father_id,
-				l.localita,
+				c.father_id,				
 				n.nazione,
 				n.prefisso
             FROM
                 " . $this->table_name . " p     
                 LEFT JOIN
                     categoria_it c
-                    ON p.categoria_id = c.categoria_id	
-				LEFT JOIN
-					localita_it l
-					ON p.localita_id=l.localita_id
+                    ON p.categoria_id = c.categoria_id					
 				LEFT JOIN
 					nazione_it n
-					ON l.nazione_id=n.nazione_id			
+					ON p.nazioneiso=n.ISO			
             ORDER BY
                 p.createddate DESC";
   
@@ -113,8 +108,8 @@ function readOne(){
 				p.nome,
 				p.categoria_id,				
 				p.nome_negozio,
-				p.localita_id,
 				p.indirizzo,
+				p.localita,
 				p.nazioneiso,
 				p.telefono,
 				p.email_c,
@@ -132,8 +127,7 @@ function readOne(){
 				p.createddate,
 				p.lastmodified,
 				c.categoria,
-				c.father_id,
-				l.localita,
+				c.father_id,		
 				n.nazione,
 				n.prefisso
             FROM
@@ -142,11 +136,8 @@ function readOne(){
                     categoria_it c
                         ON p.categoria_id = c.categoria_id
 				LEFT JOIN
-					localita_it l
-						ON p.localita_id=l.localita_id
-				LEFT JOIN
 					nazione_it n
-						ON l.nazione_id=n.nazione_id
+						ON p.nazioneiso=n.ISO
             WHERE
                 p.userID = ?
             LIMIT
@@ -170,7 +161,6 @@ function readOne(){
 	 $this->email= $row['email'];
 	 $this->nome_negozio= $row['nome_negozio'];
 	 $this->categoria_id= $row['categoria_id'];			
-	 $this->localita_id= $row['localita_id'];
 	 $this->indirizzo= $row['indirizzo'];
 	 $this->telefono= $row['telefono'];
 	 $this->email_c= $row['email_c'];
@@ -194,72 +184,6 @@ function readOne(){
 	 $this->prefisso= $row['prefisso'];	
 	}
 }
-function readSelected(){
-	$queryCategorie = "";
-
-	if( $this->cat_Id !=1){
-		$queryCategorie = "	AND  p.categoria_id IN ("
-		. $this->cat_Id .
-		")";
-	} 
-   
-    $query = "SELECT				
-				p.contatto_id,
-				p.userID,
-				p.email,
-				p.nome,
-				p.categoria_id,				
-				p.nome_negozio,
-				p.localita_id,
-				p.indirizzo,
-				p.nazioneiso,
-				p.telefono,
-				p.email_c,
-				p.ruolo,
-				p.note,
-				p.nomecontatto,
-				p.internet,
-				p.latitudine,
-				p.longitudine,
-				p.immagine,
-				p.dataiscrizione,
-				p.vers,
-				p.so,
-				p.ndr,
-				p.createddate,
-				p.lastmodified,			
-				c.categoria,
-				c.father_id,
-				l.localita,
-				n.nazione,
-				n.prefisso
-            FROM
-                " . $this->table_name . " p
-                LEFT JOIN
-                    categoria_it c
-                        ON p.categoria_id = c.categoria_id
-				LEFT JOIN
-					localita_it l
-						ON p.localita_id=l.localita_id
-				LEFT JOIN
-					nazione_it n
-						ON l.nazione_id=n.nazione_id
-            WHERE
-                p.localita_id = :loc_id
-		";
-    $query =$query . $queryCategorie;
-  
-    // prepare query statement
-    $stmt = $this->conn->prepare( $query );
-  
-   
-	//$stmt->bindParam(":cat_id", $this->cat_Id);	
-	$stmt->bindParam(":loc_id", $this->loc_Id);
-	
-    // execute query
-    $stmt->execute();
-	return $stmt;	  
-}
 function readByLatLng(){
 	$queryCategorie = "";
 
@@ -276,7 +200,7 @@ function readByLatLng(){
 				p.nome,
 				p.categoria_id,				
 				p.nome_negozio,
-				p.localita_id,
+				p.localita,
 				p.indirizzo,
 				p.nazioneiso,
 				p.telefono,
@@ -287,7 +211,6 @@ function readByLatLng(){
 				p.internet,
 				p.latitudine,
 				p.longitudine,
-				p.nazioneiso,
 				p.immagine,
 				p.dataiscrizione,
 				p.vers,
@@ -340,7 +263,7 @@ function create(){
 				nome=:nome,
 				categoria_id=:categoria_id,	
 				nome_negozio=:nome_negozio,
-				localita_id=:localita_id,
+				localita=:localita,
 				indirizzo=:indirizzo,
 				nazioneiso =:nazioneiso,
 				telefono=:telefono,
@@ -351,7 +274,6 @@ function create(){
 				internet=:internet,
 				latitudine=:latitudine,
 				longitudine=:longitudine,
-				nazioneiso=:nazioneiso,
 				immagine=:immagine,
 				dataiscrizione=:dataiscrizione,
 				vers=:vers,
@@ -372,7 +294,7 @@ function create(){
 	$stmt->bindParam(":nome", $this->nome);
 	$stmt->bindParam(":categoria_id", $this->categoria_id);	
 	$stmt->bindParam(":nome_negozio", $this->nome_negozio);
-	$stmt->bindParam(":localita_id", $this->localita_id);
+	$stmt->bindParam(":localita", $this->localita);
 	$stmt->bindParam(":indirizzo", $this->indirizzo);
 	$stmt->bindParam(":nazioneiso", $this->nazioneiso);
 	$stmt->bindParam(":telefono", $this->telefono);
@@ -406,7 +328,7 @@ function update(){
 				nome=:nome,
 				categoria_id=:categoria_id,	
 				nome_negozio=:nome_negozio,
-				localita_id=:localita_id,
+				localita=:localita,
 				indirizzo=:indirizzo,
 				telefono=:telefono,
 				email_c=:email_c,
@@ -436,7 +358,7 @@ function update(){
 	$stmt->bindParam(":nome", $this->nome);
 	$stmt->bindParam(":categoria_id", $this->categoria_id);	
 	$stmt->bindParam(":nome_negozio", $this->nome_negozio);
-	$stmt->bindParam(":localita_id", $this->localita_id);
+	$stmt->bindParam(":localita", $this->localita);
 	$stmt->bindParam(":indirizzo", $this->indirizzo);
 	$stmt->bindParam(":telefono", $this->telefono);
 	$stmt->bindParam(":email_c", $this->email_c);
