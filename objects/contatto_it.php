@@ -35,13 +35,10 @@ class Contatto_it{
 	public $localita;
 	public $nazione;
 	public $prefisso;
-	public $cat_Id;
-	public $loc_Id;
 	public $lat_min;
 	public $lat_max;
 	public $lng_min;
 	public $lng_max;
-
   
     // constructor with $db as database connection
     public function __construct($db){
@@ -313,9 +310,8 @@ function create(){
 	$stmt->bindParam(":createddate", $this->createddate);	
 	
     // execute query
-    if($stmt->execute()){
-		$last_id=$stmt->insert_id;
-        return $last_id;
+    if($stmt->execute()){		
+        return true;
     }
   
     return false;      
