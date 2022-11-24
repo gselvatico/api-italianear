@@ -28,7 +28,7 @@ $contatto_it->email = $data->email;
 $contatto_it->nome = $data->nome;
 $contatto_it->categoria_id = $data->categoria_id;
 $contatto_it->nome_negozio = $data->nome_negozio;
-$contatto_it->localita_id = $data->localita_id;
+$contatto_it->localita = $data->localita;
 $contatto_it->indirizzo = $data->indirizzo;
 $contatto_it->nazioneiso = $data->nazioneiso;
 $contatto_it->telefono = $data->telefono;
@@ -40,13 +40,9 @@ $contatto_it->internet = $data->internet;
 $contatto_it->latitudine = $data->latitudine;
 $contatto_it->longitudine = $data->longitudine;
 $contatto_it->immagine = $data->immagine;
-$contatto_it->dataiscrizione = $data->dataiscrizione;
 $contatto_it->vers = $data->vers;
 $contatto_it->so = $data->so;
 $contatto_it->ndr = $data->ndr;
-$contatto_it->cat_Id = $data->cat_Id;
-$contatto_it->loc_Id = $data->loc_Id;
-
   
 // update the contatto_it
 if($contatto_it->update()){

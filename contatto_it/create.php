@@ -32,7 +32,7 @@ if (
 	$contatto_it->nome = $data->nome;
 	$contatto_it->categoria_id = $data->categoria_id;
 	$contatto_it->nome_negozio = $data->nome_negozio;
-	$contatto_it->localita_id = $data->localita_id;
+	$contatto_it->localita = $data->localita;
 	$contatto_it->indirizzo = $data->indirizzo;
 	$contatto_it->telefono = $data->telefono;
 	$contatto_it->email_c = $data->email_c;
