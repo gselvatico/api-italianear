@@ -4,7 +4,7 @@ class Database{
     // private $db_name = "italiare_italianear";
     // private $username = "italiare_ut_near";
     // private $password = "ItA$20_21$";
-    private $host = "192.168.1.66";
+    private $host = "192.168.1.60";
     private $db_name = "italiare_italianear";
     private $username = "ut_liqui";
     private $password = "liqui";

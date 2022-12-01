@@ -315,7 +315,7 @@ function create(){
     }
   
     return false;      
-	}
+}
 function update(){  
     // update query
     $query = "UPDATE " . $this->table_name . "
