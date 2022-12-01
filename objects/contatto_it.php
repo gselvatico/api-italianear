@@ -94,7 +94,7 @@ function read(){
     $stmt->execute();
   
     return $stmt;
-}
+	}
 function readOne(){
   
     // query to read single record
@@ -180,7 +180,7 @@ function readOne(){
 	 $this->nazioneiso= $row['nazioneiso'];	
 	 $this->prefisso= $row['prefisso'];	
 	}
-}
+	}
 function readByLatLng(){
 	$queryCategorie = "";
 
@@ -247,7 +247,7 @@ function readByLatLng(){
     // execute query
     $stmt->execute();
 	return $stmt;	  
-}
+	}
 
 function create(){
   
@@ -315,7 +315,7 @@ function create(){
     }
   
     return false;      
-}
+	}
 function update(){  
     // update query
     $query = "UPDATE " . $this->table_name . "
@@ -376,7 +376,25 @@ function update(){
     }
   
     return false;
-}
+	}
+function delete(){
+  
+		// delete query
+		$query = "DELETE FROM " . $this->table_name . " WHERE userID = ?";
+	  
+		// prepare query
+		$stmt = $this->conn->prepare($query);  
+	  
+		// bind id of record to delete
+		$stmt->bindParam(1, $this->userID);
+	  
+		// execute query
+		if($stmt->execute()){
+			return true;
+		}
+	  
+		return false;
+		}
+
 }
 ?>
-
