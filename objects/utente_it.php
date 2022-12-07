@@ -144,8 +144,8 @@ function create(){
     }
   
     return false;
-      
-}
+  
+    }
 function update(){
   
     // update query
@@ -185,7 +185,26 @@ function update(){
     }
   
     return false;
-}
+    }
+    
+function delete(){
+  
+    // delete query
+    $query = "DELETE FROM " . $this->table_name . " WHERE userID = ?";
+  
+    // prepare query
+    $stmt = $this->conn->prepare($query);  
+  
+    // bind id of record to delete
+    $stmt->bindParam(1, $this->userID);
+  
+    // execute query
+    if($stmt->execute()){
+        return true;
+    }
+  
+    return false;
+    }
 }
 ?>
 
