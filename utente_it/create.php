@@ -6,10 +6,9 @@ header("Access-Control-Allow-Methods: POST");
 header("Access-Control-Max-Age: 3600");
 header("Access-Control-Allow-Headers: Content-Type, Access-Control-Allow-Headers, Authorization, X-Requested-With");
   
-// get database connection
+
 include_once '../config/database.php';
-  
-// instantiate utente_it object
+include_once '../config/apikey.php';  
 include_once '../objects/utente_it.php';
   
 $database = new Database();
@@ -19,7 +18,14 @@ $utente_it = new Utente_it($db);
   
 // get posted data
 $data = json_decode(file_get_contents("php://input"));
-  
+
+if ($data->api_key != ApiKey::$apiKey) {
+    http_response_code(403);  
+    echo json_encode(
+        array("message" => "Chiave sbagliata")
+    ); 
+    return;
+}
 // make sure data is not empty
 if( !empty($data->email)&&		
 	!empty($data->userID) 

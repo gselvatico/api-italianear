@@ -43,8 +43,8 @@ class Contatto_it{
     // constructor with $db as database connection
     public function __construct($db){
         $this->conn = $db;
-    }	
-function read(){
+    	}	
+	function read(){
   
     // select all query
     $query = "SELECT				
@@ -95,7 +95,7 @@ function read(){
   
     return $stmt;
 	}
-function readOne(){
+	function readOne(){
   
     // query to read single record
     $query = "SELECT				
@@ -181,7 +181,7 @@ function readOne(){
 	 $this->prefisso= $row['prefisso'];	
 	}
 	}
-function readByLatLng(){
+	function readByLatLng(){
 	$queryCategorie = "";
 
 	if( $this->cat_Id !=1){
@@ -249,7 +249,7 @@ function readByLatLng(){
 	return $stmt;	  
 	}
 
-function create(){
+	function create(){
   
     // query to insert record
     $query = "INSERT INTO
@@ -315,8 +315,8 @@ function create(){
     }
   
     return false;      
-}
-function update(){  
+	}
+	function update(){  
     // update query
     $query = "UPDATE " . $this->table_name . "
             SET               
@@ -377,7 +377,7 @@ function update(){
   
     return false;
 	}
-function delete(){
+	function delete(){
   
 		// delete query
 		$query = "DELETE FROM " . $this->table_name . " WHERE userID = ?";

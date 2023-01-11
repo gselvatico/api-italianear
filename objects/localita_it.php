@@ -16,9 +16,9 @@ class Localita_it{
     // constructor with $db as database connection
     public function __construct($db){
         $this->conn = $db;
-    }
-	// read products
-function read(){
+        }
+	
+    function read(){
   
     // select all query
     $query = "SELECT								
@@ -40,7 +40,7 @@ function read(){
   
     return $stmt;
 	}
-function SelectByNazione(){
+    function SelectByNazione(){
   
     // select all query
     $query = "SELECT								
@@ -63,7 +63,7 @@ function SelectByNazione(){
   
     return $stmt;
 	}
-function create(){
+    function create(){
   
     // query to insert record
     $query = "INSERT INTO
@@ -92,8 +92,7 @@ function create(){
   
     return false;
 	}
-function FindByName(){  
-        
+    function FindByName(){          
         $query = "SELECT								
                     p.localita_id,				
                     p.localita,
@@ -111,15 +110,15 @@ function FindByName(){
         $stmt->execute();
       
         // get retrieved row
-    $row = $stmt->fetch(PDO::FETCH_ASSOC);
-    if($row!=null){
-    // set values to object properties
-    $this->localita_id= $row['localita_id'];
-	 $this->localita= $row['localita'];
-     $this->nazione_id= $row['nazione_id'];
-	 $this->createddate= $row['createddate'];
-	 $this->lastmodified= $row['lastmodified'];
-    }
-    }   
+        $row = $stmt->fetch(PDO::FETCH_ASSOC);
+        if($row!=null){
+        // set values to object properties
+        $this->localita_id= $row['localita_id'];
+        $this->localita= $row['localita'];
+        $this->nazione_id= $row['nazione_id'];
+        $this->createddate= $row['createddate'];
+        $this->lastmodified= $row['lastmodified'];
+        }
+        }   
 }
 ?>

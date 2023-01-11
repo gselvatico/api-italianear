@@ -20,7 +20,7 @@ class Nazione_it{
         $this->conn = $db;
     }
 	// read products
-function read(){
+    function read(){
   
     // select all query
     $query = "SELECT								
@@ -44,7 +44,7 @@ function read(){
   
     return $stmt;
 	}
-function readActive(){
+    function readActive(){
   
     // select all query
     $query = "SELECT								
@@ -71,7 +71,7 @@ function readActive(){
   
     return $stmt;
 	}
-function create(){
+    function create(){
   
     // query to insert record
     $query = "INSERT INTO
@@ -105,8 +105,7 @@ function create(){
   
     return false;
 	}
-function findByName(){
-  
+    function findByName(){  
         // select all query
         $query = "SELECT								
                     p.nazione_id,				
@@ -128,17 +127,16 @@ function findByName(){
         // execute query
         $stmt->execute();
         $row = $stmt->fetch(PDO::FETCH_ASSOC);
-    if($row!=null){
-    // set values to object properties
-    $this->nazione_id= $row['nazione_id'];
-	 $this->nazione= $row['nazione'];
-     $this->iso= $row['iso'];
-     $this->prefisso= $row['prefisso'];
-	 $this->flag= $row['flag'];	
-	 $this->createddate= $row['createddate'];
-	 $this->lastmodified= $row['lastmodified'];
-    }
-       
- }
+        if($row!=null){
+        // set values to object properties
+        $this->nazione_id= $row['nazione_id'];
+        $this->nazione= $row['nazione'];
+        $this->iso= $row['iso'];
+        $this->prefisso= $row['prefisso'];
+        $this->flag= $row['flag'];	
+        $this->createddate= $row['createddate'];
+        $this->lastmodified= $row['lastmodified'];
+        }        
+       }
 }
 ?>

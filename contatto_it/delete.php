@@ -8,6 +8,7 @@ header("Access-Control-Allow-Headers: Content-Type, Access-Control-Allow-Headers
   
 // include database and object file
 include_once '../config/database.php';
+include_once '../config/apikey.php';
 include_once '../objects/contatto_it.php';
   
 // get database connection
@@ -19,7 +20,14 @@ $contatto_it = new Contatto_it($db);
   
 // get contatto_it id
 $data = json_decode(file_get_contents("php://input"));
-  
+
+if ($data->api_key != ApiKey::$apiKey) {
+    http_response_code(403);  
+    echo json_encode(
+        array("message" => "Chiave sbagliata")
+    ); 
+    return;
+}
 // set contatto_it id to be deleted
 $contatto_it->userID = $data->userID;
   

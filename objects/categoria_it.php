@@ -21,9 +21,8 @@ class Categoria_it{
     // constructor with $db as database connection
     public function __construct($db){
         $this->conn = $db;
-    }
-	// read products
-function read(){
+        }
+    function read(){
   
     // select all query
     $query = "SELECT								
@@ -45,7 +44,7 @@ function read(){
   
     return $stmt;
 	}
-function readOne(){
+    function readOne(){
   
     // query to read single record
     $query = "SELECT											
@@ -74,8 +73,8 @@ function readOne(){
   
     // set values to object properties
     $this->categoria = $row['categoria'];   
-}
-function selectByCitta(){  
+    }
+    function selectByCitta(){  
    
     $query = "SELECT											
 				p.categoria_id,
@@ -100,14 +99,9 @@ function selectByCitta(){
     $stmt->execute();
   
 	return $stmt;
-    // get retrieved row
-//    $row = $stmt->fetch(PDO::FETCH_ASSOC);
-//  
-//    // set values to object properties
-//    $this->categoria_id = $row['categoria_id'];   
-//	$this->categoria = $row['categoria'];   
-}
-function readbylatlng(){  
+ 
+    }
+    function readbylatlng(){  
     $queryMaster = "";	
     $query = "SELECT											
 				f.categoria_id,
@@ -136,8 +130,8 @@ function readbylatlng(){
     $stmt->execute();
   
 	return $stmt;
-}
-function create(){
+    }
+    function create(){
   
     // query to insert record
     $query = "INSERT INTO
@@ -164,7 +158,7 @@ function create(){
   
     return false;
 	}
-function update(){
+    function update(){
   
     // update query
     $query = "UPDATE
@@ -192,8 +186,8 @@ function update(){
     }
   
     return false;
-}
-function delete(){
+    }
+    function delete(){
   
     // delete query
     $query = "DELETE FROM " . $this->table_name . " WHERE categoria_id = ?";

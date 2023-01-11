@@ -23,9 +23,9 @@ class Utente_it{
     // constructor with $db as database connection
     public function __construct($db){
         $this->conn = $db;
-    }
-	// read products
-function read(){
+        }
+
+    function read(){
   
     // select all query
     $query = "SELECT				
@@ -53,7 +53,7 @@ function read(){
   
     return $stmt;
 	}
-function readOne(){
+    function readOne(){
   
     // query to read single record
      $query = "SELECT				
@@ -102,9 +102,9 @@ function readOne(){
 	 $this->createddate= $row['createddate'];
 	 $this->lastmodified= $row['lastmodified'];
     }
-}
+    }
 	// create product
-function create(){
+    function create(){
   
     // query to insert record
     $query = "INSERT INTO
@@ -146,7 +146,7 @@ function create(){
     return false;
   
     }
-function update(){
+    function update(){
   
     // update query
     $query = "UPDATE " . $this->table_name . "
@@ -187,7 +187,7 @@ function update(){
     return false;
     }
     
-function delete(){
+    function delete(){
   
     // delete query
     $query = "DELETE FROM " . $this->table_name . " WHERE userID = ?";

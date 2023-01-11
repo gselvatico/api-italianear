@@ -21,9 +21,9 @@ class Log_it{
     // constructor with $db as database connection
     public function __construct($db){
         $this->conn = $db;
-    }
-	// read products
-function read(){
+        }
+	
+    function read(){
   
     // select all query
     $query = "SELECT								
@@ -50,7 +50,7 @@ function read(){
     return $stmt;
 	}
 
-function create(){  
+    function create(){  
     // query to insert record
     $query = "INSERT INTO
                 " . $this->table_name . "

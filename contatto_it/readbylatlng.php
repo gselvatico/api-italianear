@@ -8,6 +8,7 @@ header("Access-Control-Allow-Headers: Content-Type, Access-Control-Allow-Headers
 
 
 include_once '../config/database.php';
+include_once '../config/apikey.php';
 include_once '../objects/contatto_it.php';
   
 // instantiate database and contatto_it object
@@ -16,8 +17,6 @@ $db = $database->getConnection();
   
 // initialize object
 $contatto_it = new Contatto_it($db);
-
-
 // $contatto_it->loc_Id =str_replace("@","," , isset($_GET['l_id']) ? $_GET['l_id'] : die());
 // $contatto_it->cat_Id = isset($_GET['c_id']) ? $_GET['c_id'] : die();
 
@@ -30,12 +29,21 @@ $contatto_it->lng_max = $data->lng_max;
 $contatto_it->cat_Id= $data->cat_id;
 
 
+if ($data->api_key != ApiKey::$apiKey) {
+    http_response_code(403);  
+    echo json_encode(
+        array("message" => "Chiave sbagliata")
+    ); 
+    return;
+}
+
 $stmt = $contatto_it->readByLatLng();
 // $num =0;
 $num =$stmt->rowCount();
   
 // check if more than 0 record found
 if($num>0){
+
   
     // contatto_its array
     $contatto_its_arr=array();
