@@ -8,6 +8,7 @@ header("Access-Control-Allow-Headers: Content-Type, Access-Control-Allow-Headers
   
 // include database and object files
 include_once '../config/database.php';
+include_once '../config/apikey.php';
 include_once '../objects/categoria_it.php';
   
 // get database connection
@@ -19,7 +20,13 @@ $categoria_it = new Categoria_it($db);
   
 // get id of categoria_it to be edited
 $data = json_decode(file_get_contents("php://input"));
-  
+if ($data->api_key != ApiKey::$apiKey) {
+    http_response_code(403);  
+    echo json_encode(
+        array("message" => "Chiave sbagliata")
+    ); 
+    return;
+}
 // set ID property of categoria_it to be edited
 $categoria_it->categoria_id = $data->categoria_id;
   

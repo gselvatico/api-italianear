@@ -8,6 +8,7 @@ header('Content-Type: application/json');
   
 // include database and object files
 include_once '../config/database.php';
+include_once '../config/apikey.php';
 include_once '../objects/categoria_it.php';
   
 // get database connection
@@ -18,6 +19,14 @@ $db = $database->getConnection();
 $categoria_it = new Categoria_it($db);
   
 $data = json_decode(file_get_contents("php://input"));
+
+if ($data->api_key != ApiKey::$apiKey) {
+    http_response_code(403);  
+    echo json_encode(
+        array("message" => "Chiave sbagliata")
+    ); 
+    return;
+}
 //$data = file_get_contents("php://input");
 $categoria_it->lat_min= $data->lat_min;
 $categoria_it->lat_max = $data->lat_max;
