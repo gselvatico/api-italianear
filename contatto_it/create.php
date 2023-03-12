@@ -40,6 +40,7 @@ if (
 	$contatto_it->localita = $data->localita;
 	$contatto_it->indirizzo = $data->indirizzo;
 	$contatto_it->telefono = $data->telefono;
+	$contatto_it->tel_prefix = $data->tel_prefix;
 	$contatto_it->email_c = $data->email_c;
 	$contatto_it->ruolo = $data->ruolo;
 	$contatto_it->note = $data->note;

@@ -47,7 +47,8 @@ if($num>0){
 			"data_URU" => $data_URU,			
 			"vers" => $vers,
 			"so" => $so,
-			"ndr" => $ndr,
+			"ndr" => $ndr,            
+            "tipo_reg" => $tipo_reg,
 			"createddate" => $createddate,
 			"lastmodified" => $lastmodified
         );

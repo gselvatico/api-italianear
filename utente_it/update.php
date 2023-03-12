@@ -39,7 +39,7 @@ $utente_it->data_URU = $data->data_URU;
 $utente_it->vers = $data->vers;
 $utente_it->so = $data->so;
 $utente_it->ndr = $data->ndr;
-  
+$utente_it->tipo_reg = $data->tipo_reg;
 // update the utente_it
 if($utente_it->update()){
   

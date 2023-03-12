@@ -13,6 +13,7 @@ class Contatto_it{
     public $categoria_id;
     public $nome_negozio;
     public $indirizzo;
+	public $tel_prefix;
 	public $telefono;
 	public $email_c;
 	public $ruolo;
@@ -57,6 +58,7 @@ class Contatto_it{
 				p.indirizzo,
 				p.localita,
 				p.nazioneiso,
+				p.tel_prefix,
 				p.telefono,
 				p.email_c,
 				p.ruolo,
@@ -108,6 +110,7 @@ class Contatto_it{
 				p.indirizzo,
 				p.localita,
 				p.nazioneiso,
+				p.tel_prefix,
 				p.telefono,
 				p.email_c,
 				p.ruolo,
@@ -159,6 +162,7 @@ class Contatto_it{
 	 $this->nome_negozio= $row['nome_negozio'];
 	 $this->categoria_id= $row['categoria_id'];			
 	 $this->indirizzo= $row['indirizzo'];
+	 $this->tel_prefix= $row['tel_prefix'];
 	 $this->telefono= $row['telefono'];
 	 $this->email_c= $row['email_c'];
 	 $this->ruolo= $row['ruolo'];
@@ -200,6 +204,7 @@ class Contatto_it{
 				p.localita,
 				p.indirizzo,
 				p.nazioneiso,
+				p.tel_prefix,
 				p.telefono,
 				p.email_c,
 				p.ruolo,
@@ -262,7 +267,8 @@ class Contatto_it{
 				nome_negozio=:nome_negozio,
 				localita=:localita,
 				indirizzo=:indirizzo,
-				nazioneiso =:nazioneiso,
+				nazioneiso=:nazioneiso,
+				tel_prefix=:tel_prefix,
 				telefono=:telefono,
 				email_c=:email_c,
 				ruolo=:ruolo,
@@ -294,6 +300,7 @@ class Contatto_it{
 	$stmt->bindParam(":localita", $this->localita);
 	$stmt->bindParam(":indirizzo", $this->indirizzo);
 	$stmt->bindParam(":nazioneiso", $this->nazioneiso);
+	$stmt->bindParam(":tel_prefix", $this->tel_prefix);
 	$stmt->bindParam(":telefono", $this->telefono);
 	$stmt->bindParam(":email_c", $this->email_c);
 	$stmt->bindParam(":ruolo", $this->ruolo);
@@ -326,6 +333,7 @@ class Contatto_it{
 				nome_negozio=:nome_negozio,
 				localita=:localita,
 				indirizzo=:indirizzo,
+				tel_prefix=:tel_prefix,
 				telefono=:telefono,
 				email_c=:email_c,
 				ruolo=:ruolo,
@@ -356,6 +364,7 @@ class Contatto_it{
 	$stmt->bindParam(":nome_negozio", $this->nome_negozio);
 	$stmt->bindParam(":localita", $this->localita);
 	$stmt->bindParam(":indirizzo", $this->indirizzo);
+	$stmt->bindParam(":tel_prefix", $this->tel_prefix);
 	$stmt->bindParam(":telefono", $this->telefono);
 	$stmt->bindParam(":email_c", $this->email_c);
 	$stmt->bindParam(":ruolo", $this->ruolo);

@@ -67,6 +67,7 @@ if($num>0){
 			"dataiscrizione" => $dataiscrizione,	
         	"localita" => $localita,
 			"indirizzo" => $indirizzo,
+            "tel_prefix" => $tel_prefix,
 			"telefono" => $telefono,
 			"email_c" => $email_c,
 			"ruolo" => $ruolo,

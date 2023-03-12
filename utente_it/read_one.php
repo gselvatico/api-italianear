@@ -36,6 +36,7 @@ if($utente_it->userID!=null){
 			"vers" =>$utente_it->vers,
 			"so" =>$utente_it->so,
 			"ndr" =>$utente_it->ndr,
+            "tipo_reg" =>$utente_it->tipo_reg,
 			"createddate" =>$utente_it->createddate,
 			"lastmodified" =>$utente_it->lastmodified			
         );

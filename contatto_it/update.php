@@ -39,6 +39,7 @@ $contatto_it->nome_negozio = $data->nome_negozio;
 $contatto_it->localita = $data->localita;
 $contatto_it->indirizzo = $data->indirizzo;
 $contatto_it->nazioneiso = $data->nazioneiso;
+$contatto_it->tel_prefix = $data->tel_prefix;
 $contatto_it->telefono = $data->telefono;
 $contatto_it->email_c = $data->email_c;
 $contatto_it->ruolo = $data->ruolo;

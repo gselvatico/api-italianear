@@ -16,6 +16,7 @@ class Utente_it{
 	public $vers;
 	public $so;
 	public $ndr;
+    public $tipo_reg;
 	public $createddate;
 	public $lastmodified;
 					
@@ -39,6 +40,7 @@ class Utente_it{
 				p.vers,
 				p.so,
 				p.ndr,
+                p.tipo_reg,
 				p.createddate,
 				p.lastmodified
             FROM
@@ -67,6 +69,7 @@ class Utente_it{
 				p.vers,
 				p.so,
 				p.ndr,
+                p.tipo_reg,
 				p.createddate,
 				p.lastmodified
             FROM
@@ -99,6 +102,7 @@ class Utente_it{
 	 $this->vers= $row['vers'];
 	 $this->so= $row['so'];
 	 $this->ndr= $row['ndr'];
+     $this->tipo_reg= $row['tipo_reg'];
 	 $this->createddate= $row['createddate'];
 	 $this->lastmodified= $row['lastmodified'];
     }
@@ -118,7 +122,8 @@ class Utente_it{
 				data_URU=:data_URU,
 				vers=:vers,
 				ndr=:ndr,
-				so=:so,              
+				so=:so,
+                tipo_reg=:tipo_reg,              
 				createddate=:createddate";
     // prepare qcreateddate,uery
     $stmt = $this->conn->prepare($query);
@@ -136,6 +141,7 @@ class Utente_it{
 	$stmt->bindParam(":vers", $this->vers);
     $stmt->bindParam(":so", $this->so);  
 	$stmt->bindParam(":ndr", $this->ndr); 
+    $stmt->bindParam(":tipo_reg", $this->tipo_reg); 
 	$stmt->bindParam(":createddate", $this->createddate);	
 	
     // execute query
@@ -157,7 +163,8 @@ class Utente_it{
 				data_URU=:data_URU,
 				vers=:vers,
 				ndr=:ndr,
-				so=:so				
+				so=:so,
+                tipo_reg=:tipo_reg  				
             WHERE
                 userID = :userID";
   
@@ -177,7 +184,8 @@ class Utente_it{
 	$stmt->bindParam(":data_URU", $this->data_URU);
 	$stmt->bindParam(":vers", $this->vers);
     $stmt->bindParam(":so", $this->so);  
-	$stmt->bindParam(":ndr", $this->ndr); 
+	$stmt->bindParam(":ndr", $this->ndr);
+    $stmt->bindParam(":tipo_reg", $this->tipo_reg);  
   
     // execute the query
     if($stmt->execute()){

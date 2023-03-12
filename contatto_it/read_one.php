@@ -33,6 +33,7 @@ if($contatto_it->contatto_id!=null){
 			"categoria_id" =>$contatto_it->categoria_id,	
         	"localita" =>$contatto_it->localita,
 			"indirizzo" =>$contatto_it->indirizzo,
+			"tel_prefix" =>$contatto_it->tel_prefix,
 			"telefono" =>$contatto_it->telefono,
 			"email_c" =>$contatto_it->email_c,
 			"ruolo" =>$contatto_it->ruolo,

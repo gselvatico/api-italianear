@@ -45,6 +45,7 @@ if( !empty($data->email)&&
 	$utente_it->vers = $data->vers;
 	$utente_it->so = $data->so;
 	$utente_it->ndr = $data->ndr;
+    $utente_it->tipo_reg = $data->tipo_reg;
 	$utente_it->createddate = date('Y-m-d H:i:s');
   
     // create the utente_it
