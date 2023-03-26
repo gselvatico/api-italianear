@@ -32,7 +32,8 @@ class Categoria_it{
 				p.createddate,
 				p.lastmodified
             FROM
-                " . $this->table_name . " p                
+                " . $this->table_name . " p
+            WHERE p.father_id<>p.categoria_id                
             ORDER BY
                 p.categoria ASC";
   
