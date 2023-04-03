@@ -36,11 +36,19 @@ $mail->setFrom('info@italianear.it', 'Info ItaliaNear');
 $mail->addAddress($data->recipient, '');
 // $mail->addAddress('picobellone@gmail.com', '');
 // $mail->addAddress('u.ricci@gmail.com', '');
-$mail->isHTML(false);      
+$mail->isHTML(true);      
 $mail->Subject = 'Benvenuto da ItaliaNear';
-$mail->Body = "Questa è una email da ItaliaNear 
-per l'utente $data->nickname
-quando si iscrive a ItaliaNear";
+$mail->Body = "
+Buongiorno  $data->nickname,<br/>
+Grazie per la tua registrazione!<br/>
+Ti saremo grati se vorrai condividere con noi la tua esperienza di utente ItaliaNear, facendoci sapere se la nostra app ti è stata utile e segnalandoci eventuali anomalie o suggerimenti per migliorarne l'utilizzo. <br/>
+Ecco i nostri riferimenti:<br/>
+e-mail: info@italianear.it<br/>
+Web site: https://italianear.it/<br/>
+<br/>
+Un cordiale saluto<br/>
+<br/>
+Il team ItaliaNear";
 // echo json_encode(array("message" => "OK.")); 
 try {
     if(!$mail->send()) {
