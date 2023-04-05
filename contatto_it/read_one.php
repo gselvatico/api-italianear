@@ -13,13 +13,13 @@ include_once '../config/apikey.php';
 
 $data = json_decode(file_get_contents("php://input"));
 
-if ($data->api_key != ApiKey::$apiKey) {
-    http_response_code(403);  
-    echo json_encode(
-        array("message" => "Chiave sbagliata")
-    ); 
-    return;
-} 
+// if ($data->api_key != ApiKey::$apiKey) {
+//     http_response_code(403);  
+//     echo json_encode(
+//         array("message" => "Chiave sbagliata")
+//     ); 
+//     return;
+// } 
 // get database connection
 $database = new Database();
 $db = $database->getConnection();
