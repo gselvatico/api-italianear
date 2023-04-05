@@ -8,14 +8,25 @@ header("Content-Type: application/json; charset=UTF-8");
 // include database and object files
 include_once '../config/database.php';
 include_once '../objects/categoria_it.php';
-  
+include_once '../config/apikey.php';
+
+$data = json_decode(file_get_contents("php://input"));
+
+if ($data->api_key != ApiKey::$apiKey) {
+    http_response_code(403);  
+    echo json_encode(
+        array("message" => "Chiave sbagliata")
+    ); 
+    return;
+}
 // instantiate database and categoria_it object
 $database = new Database();
 $db = $database->getConnection();
   
 // initialize object
 $categoria_it = new Categoria_it($db);
-  
+
+
 // read categoria_its will be here
 // query categoria_its
 $stmt = $categoria_it->read();
