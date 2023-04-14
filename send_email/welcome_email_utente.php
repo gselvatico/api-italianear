@@ -22,13 +22,14 @@ if ($data->api_key != ApiKey::$apiKey) {
 $mail = new PHPMailer(true);
 // $mail->SMTPDebug = SMTP::DEBUG_SERVER;  
 $mail->isSMTP();
-$mail->Host = 'mail.italianear.it';
+// $mail->Host = 'mail.italianear.it';
+$mail->Host = 'italianear.it';
+// $mail->Host = 'smtp.gmail.com';
 $mail->SMTPAuth = true;
 $mail->Username = ApiKey::$usermail;
 $mail->Password = ApiKey::$mailpwd;
-$mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;    
-// $mail->SMTPSecure = 'ssl';
-$mail->Port = 465;
+$mail->SMTPSecure = 'tsl';
+$mail->Port = 587;
 $mail->CharSet = "UTF-8";
 
 
@@ -40,13 +41,20 @@ $mail->isHTML(true);
 $mail->Subject = 'Benvenuto da ItaliaNear';
 $mail->Body = "<p>Buongiorno $data->nickname,</p>
 <p>Grazie per la tua registrazione!</p>
-<p>Ti saremo grati se vorrai condividere con noi la tua esperienza di utente ItaliaNear, facendoci sapere se la nostra app ti è stata utile e segnalandoci eventuali anomalie o suggerimenti per migliorarne l'utilizzo.</p>
+<p>Condividi con noi la tua esperienza di utente ItaliaNear: facci sapere che cosa pensi della nostra app e segnalaci eventuali anomalie o suggerimenti per migliorarne il funzionamento.</p>
 <p>Ecco i nostri riferimenti:</p>
 <p>e-mail: info@italianear.it</p>
 <p>Web site: https://italianear.it/</p>
 <p>Un cordiale saluto</p>
 
-<p>Il team ItaliaNear</p>";
+<p>Il team ItaliaNear</p>
+<p><a href=\"https://www.youtube.com/channel/UCZwgxMhRcQUJwufKFy8bjlA\"> YouTube</a><br/>	
+<a href=\"https://www.facebook.com/ItaliaNear.it\"> Facebook</a><br/>
+<a href=\"https://twitter.com/ItaliaNear\"> Twitter</a><br/>
+<a href=\"https://www.instagram.com/italianear\"> Instagram</a><br/>
+<a href=\"https://www.linkedin.com/company/italianear/\"> LinkedIn</a><br/>
+<a href=\"https://open.spotify.com/show/53n3PWA7xlFrVEOpAY5DU4\"> Spotify</a></p>	";
+
 // echo json_encode(array("message" => "OK.")); 
 try {
     if(!$mail->send()) {

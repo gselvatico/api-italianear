@@ -22,20 +22,19 @@ if ($data->api_key != ApiKey::$apiKey) {
 $mail = new PHPMailer(true);
 // $mail->SMTPDebug = SMTP::DEBUG_SERVER;  
 $mail->isSMTP();
-$mail->Host = 'mail.italianear.it';
+// $mail->Host = 'mail.italianear.it';
+$mail->Host = 'italianear.it';
+// $mail->Host = 'smtp.gmail.com';
 $mail->SMTPAuth = true;
 $mail->Username = ApiKey::$usermail;
 $mail->Password = ApiKey::$mailpwd;
-$mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;    
-// $mail->SMTPSecure = 'ssl';
-$mail->Port = 465;
+$mail->SMTPSecure = "tsl";
+$mail->Port = 587;
 $mail->CharSet = "UTF-8";
 
 
 $mail->setFrom('info@italianear.it', 'Info ItaliaNear');
 $mail->addAddress($data->recipient, '');
-// $mail->addAddress('picobellone@gmail.com', '');
-// $mail->addAddress('u.ricci@gmail.com', '');
 $mail->isHTML(true);      
 $mail->Subject = 'Benvenuto da ItaliaNear';
 $mail->Body = "<p>Buongiorno $data->nickname,</p>
