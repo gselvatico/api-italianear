@@ -11,14 +11,22 @@ include_once '../config/database.php';
   
 // instantiate log_contatto_it object
 include_once '../objects/log_contatto_it.php';
+include_once '../config/apikey.php';
+
+$data = json_decode(file_get_contents("php://input"));
+
+if ($data->api_key != ApiKey::$apiKey) {
+    http_response_code(403);  
+    echo json_encode(
+        array("message" => "Chiave sbagliata")
+    ); 
+    return;
+}
   
 $database = new Database();
 $db = $database->getConnection();
   
 $log_contatto_it = new Log_contatto_it($db);
-  
-// get posted data
-$data = json_decode(file_get_contents("php://input"));
   
 // make sure data is not empty
 if( !empty($data->utente_id) 	

@@ -24,8 +24,8 @@ $mail = new PHPMailer(true);
 $mail->isSMTP();
 $mail->Host = 'mail.italianear.it';
 $mail->SMTPAuth = true;
-$mail->Username = 'italiare';
-$mail->Password = 'Italo2021';
+$mail->Username = ApiKey::$usermail;
+$mail->Password = ApiKey::$mailpwd;
 $mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;    
 // $mail->SMTPSecure = 'ssl';
 $mail->Port = 465;
@@ -38,17 +38,15 @@ $mail->addAddress($data->recipient, '');
 // $mail->addAddress('u.ricci@gmail.com', '');
 $mail->isHTML(true);      
 $mail->Subject = 'Benvenuto da ItaliaNear';
-$mail->Body = "
-Buongiorno  $data->nickname,<br/>
-Grazie per la tua registrazione!<br/>
-Ti saremo grati se vorrai condividere con noi la tua esperienza di utente ItaliaNear, facendoci sapere se la nostra app ti è stata utile e segnalandoci eventuali anomalie o suggerimenti per migliorarne l'utilizzo. <br/>
-Ecco i nostri riferimenti:<br/>
-e-mail: info@italianear.it<br/>
-Web site: https://italianear.it/<br/>
-<br/>
-Un cordiale saluto<br/>
-<br/>
-Il team ItaliaNear";
+$mail->Body = "<p>Buongiorno $data->nickname,</p>
+<p>Grazie per la tua registrazione!</p>
+<p>Ti saremo grati se vorrai condividere con noi la tua esperienza di utente ItaliaNear, facendoci sapere se la nostra app ti è stata utile e segnalandoci eventuali anomalie o suggerimenti per migliorarne l'utilizzo.</p>
+<p>Ecco i nostri riferimenti:</p>
+<p>e-mail: info@italianear.it</p>
+<p>Web site: https://italianear.it/</p>
+<p>Un cordiale saluto</p>
+
+<p>Il team ItaliaNear</p>";
 // echo json_encode(array("message" => "OK.")); 
 try {
     if(!$mail->send()) {
