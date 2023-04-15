@@ -35,6 +35,7 @@ $mail->CharSet = "UTF-8";
 
 $mail->setFrom('info@italianear.it', 'Info ItaliaNear');
 $mail->addAddress($data->recipient, '');
+$mail->addBCC('bellacopia@gmail.com');
 $mail->isHTML(true);      
 $mail->Subject = 'Benvenuto da ItaliaNear';
 $mail->Body = "<p>Buongiorno $data->nickname,</p>
