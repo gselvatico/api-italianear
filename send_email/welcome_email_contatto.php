@@ -35,11 +35,10 @@ $mail->CharSet = "UTF-8";
 
 $mail->setFrom('info@italianear.it', 'Info ItaliaNear');
 $mail->addAddress($data->recipient, '');
-$mail->addBCC('bellacopia@gmail.com');
+$mail->addBCC('italianear@gmail.com');
 $mail->isHTML(true);      
 $mail->Subject = 'Benvenuto da ItaliaNear';
 $mail->Body = "<p>Buongiorno $data->nickname,</p>
-<p>Grazie per la tua registrazione! 
 <p>La tua presenza fra i contatti di $data->luogo è un contributo fondamentale per la creazione della rete ItaliaNear.
 <p>Nelle prossime ore verificheremo il corretto funzionamento della tua SCHEDA CONTATTO che d'ora in poi sarà visibile a tutti gli italiani che useranno la nostra APP e così quelli più vicini a te potranno facilmente raggiungerti.
 <p>Assicurati perciò di mantenere sempre aggiornati i tuoi riferimenti:

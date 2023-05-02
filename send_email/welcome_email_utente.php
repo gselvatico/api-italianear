@@ -35,7 +35,7 @@ $mail->CharSet = "UTF-8";
 
 $mail->setFrom('info@italianear.it', 'Info ItaliaNear');
 $mail->addAddress($data->recipient, '');
-$mail->addBCC('bellacopia@gmail.com');
+$mail->addBCC('italianear@gmail.com');
 // $mail->addAddress('picobellone@gmail.com', '');
 // $mail->addAddress('u.ricci@gmail.com', '');
 $mail->isHTML(true);      
