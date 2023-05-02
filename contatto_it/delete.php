@@ -10,14 +10,7 @@ header("Access-Control-Allow-Headers: Content-Type, Access-Control-Allow-Headers
 include_once '../config/database.php';
 include_once '../config/apikey.php';
 include_once '../objects/contatto_it.php';
-  
-// get database connection
-$database = new Database();
-$db = $database->getConnection();
-  
-// prepare contatto_it object
-$contatto_it = new Contatto_it($db);
-  
+
 // get contatto_it id
 $data = json_decode(file_get_contents("php://input"));
 
@@ -28,6 +21,18 @@ if ($data->api_key != ApiKey::$apiKey) {
     ); 
     return;
 }
+// get database connection
+$database = new Database();
+if(isset($data->isTest) && $data->isTest)
+{
+    $db = $database->getTestConnection();
+}else {
+    $db = $database->getConnection();  
+}
+  
+// prepare contatto_it object
+$contatto_it = new Contatto_it($db);
+  
 // set contatto_it id to be deleted
 $contatto_it->userID = $data->userID;
   

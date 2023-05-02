@@ -13,7 +13,12 @@ include_once '../config/database.php';
 include_once '../objects/localita_it.php';
   
 $database = new Database();
-$db = $database->getConnection();
+if(isset($data->isTest) && $data->isTest)
+{
+    $db = $database->getTestConnection();
+}else {
+    $db = $database->getConnection();  
+}
   
 $localita_it = new Localita_it($db);
   

@@ -6,11 +6,11 @@ header("Access-Control-Allow-Methods: POST");
 header("Access-Control-Max-Age: 3600");
 header("Access-Control-Allow-Headers: Content-Type, Access-Control-Allow-Headers, Authorization, X-Requested-With");
   
-// include database and object file
+// include database and object files
 include_once '../config/database.php';
 include_once '../config/apikey.php';
-include_once '../objects/categoria_it.php';
-// get categoria_it id
+include_once '../objects/c_rating.php';
+// get posted data
 $data = json_decode(file_get_contents("php://input"));
 
 if ($data->api_key != ApiKey::$apiKey) {
@@ -29,29 +29,32 @@ if(isset($data->isTest) && $data->isTest)
     $db = $database->getConnection();  
 }
   
-// prepare categoria_it object
-$categoria_it = new Categoria_it($db);
+// prepare c_rating object
+$c_rating = new C_rating($db);
   
-// set categoria_it id to be deleted
-$categoria_it->categoria_id = $data->categoria_id;
-  
-// delete the categoria_it
-if($categoria_it->delete()){
+// set ID property of c_rating to be edited
+$c_rating->c_rating = $data->c_rating;
+$c_rating->description = $data->description;
+$c_rating->contatto_id = $data->contatto_id;
+$c_rating->utente_id = $data->utente_id;
+
+// update the c_rating
+if($c_rating->update()){
   
     // set response code - 200 ok
     http_response_code(200);
   
     // tell the user
-    echo json_encode(array("message" => "categoria_it was deleted."));
+    echo json_encode(array("message" => "c_rating was updated."));
 }
   
-// if unable to delete the categoria_it
+// if unable to update the c_rating, tell the user
 else{
   
     // set response code - 503 service unavailable
     http_response_code(503);
   
     // tell the user
-    echo json_encode(array("message" => "Unable to delete categoria_it."));
+    echo json_encode(array("message" => "Unable to update c_rating."));
 }
 ?>

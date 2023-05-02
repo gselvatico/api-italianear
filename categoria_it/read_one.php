@@ -22,7 +22,12 @@ if ($data->api_key != ApiKey::$apiKey) {
 }
 // get database connection
 $database = new Database();
-$db = $database->getConnection();
+if(isset($data->isTest) && $data->isTest)
+{
+    $db = $database->getTestConnection();
+}else {
+    $db = $database->getConnection();  
+}
   
 // prepare categoria_it object
 $categoria_it = new Categoria_it($db);

@@ -12,7 +12,12 @@ include_once '../objects/nazione_it.php';
   
 // get database connection
 $database = new Database();
-$db = $database->getConnection();
+if(isset($data->isTest) && $data->isTest)
+{
+    $db = $database->getTestConnection();
+}else {
+    $db = $database->getConnection();  
+}
   
 // prepare nazione_it object
 $nazione_it = new Nazione_it($db);

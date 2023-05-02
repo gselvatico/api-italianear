@@ -6,11 +6,12 @@ header("Access-Control-Allow-Methods: POST");
 header("Access-Control-Max-Age: 3600");
 header("Access-Control-Allow-Headers: Content-Type, Access-Control-Allow-Headers, Authorization, X-Requested-With");
   
-// include database and object file
+
 include_once '../config/database.php';
 include_once '../config/apikey.php';
-include_once '../objects/categoria_it.php';
-// get categoria_it id
+include_once '../objects/c_rating.php';
+
+// get posted data
 $data = json_decode(file_get_contents("php://input"));
 
 if ($data->api_key != ApiKey::$apiKey) {
@@ -19,7 +20,7 @@ if ($data->api_key != ApiKey::$apiKey) {
         array("message" => "Chiave sbagliata")
     ); 
     return;
-} 
+}
 // get database connection
 $database = new Database();
 if(isset($data->isTest) && $data->isTest)
@@ -29,29 +30,30 @@ if(isset($data->isTest) && $data->isTest)
     $db = $database->getConnection();  
 }
   
-// prepare categoria_it object
-$categoria_it = new Categoria_it($db);
+// prepare c_rating object
+$c_rating = new C_rating($db);
+
+// set c_rating id to be deleted
+$c_rating->contatto_id = $data->contatto_id;
+$c_rating->utente_id = $data->utente_id;
   
-// set categoria_it id to be deleted
-$categoria_it->categoria_id = $data->categoria_id;
-  
-// delete the categoria_it
-if($categoria_it->delete()){
+// delete the c_rating
+if($c_rating->delete()){
   
     // set response code - 200 ok
     http_response_code(200);
   
     // tell the user
-    echo json_encode(array("message" => "categoria_it was deleted."));
+    echo json_encode(array("message" => "L'c_rating è stato cancellato."));
 }
   
-// if unable to delete the categoria_it
+// if unable to delete the c_rating
 else{
   
     // set response code - 503 service unavailable
     http_response_code(503);
   
     // tell the user
-    echo json_encode(array("message" => "Unable to delete categoria_it."));
+    echo json_encode(array("message" => "L'c_rating NON è stato cancellato."));
 }
 ?>

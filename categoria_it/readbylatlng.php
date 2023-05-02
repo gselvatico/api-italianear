@@ -11,13 +11,6 @@ include_once '../config/database.php';
 include_once '../config/apikey.php';
 include_once '../objects/categoria_it.php';
   
-// get database connection
-$database = new Database();
-$db = $database->getConnection();
-  
-// prepare categoria_it object
-$categoria_it = new Categoria_it($db);
-  
 $data = json_decode(file_get_contents("php://input"));
 
 if ($data->api_key != ApiKey::$apiKey) {
@@ -26,7 +19,19 @@ if ($data->api_key != ApiKey::$apiKey) {
         array("message" => "Chiave sbagliata")
     ); 
     return;
+}  
+// get database connection
+$database = new Database();
+if(isset($data->isTest) && $data->isTest)
+{
+    $db = $database->getTestConnection();
+}else {
+    $db = $database->getConnection();  
 }
+  
+// prepare categoria_it object
+$categoria_it = new Categoria_it($db);
+
 //$data = file_get_contents("php://input");
 $categoria_it->lat_min= $data->lat_min;
 $categoria_it->lat_max = $data->lat_max;

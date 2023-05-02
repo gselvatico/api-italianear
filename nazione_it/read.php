@@ -11,7 +11,12 @@ include_once '../objects/nazione_it.php';
   
 // instantiate database and nazione_it object
 $database = new Database();
-$db = $database->getConnection();
+if(isset($data->isTest) && $data->isTest)
+{
+    $db = $database->getTestConnection();
+}else {
+    $db = $database->getConnection();  
+}
   
 // initialize object
 $nazione_it = new Nazione_it($db);

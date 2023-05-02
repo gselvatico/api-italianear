@@ -10,12 +10,7 @@ header("Access-Control-Allow-Headers: Content-Type, Access-Control-Allow-Headers
 include_once '../config/database.php';
 include_once '../config/apikey.php';  
 include_once '../objects/utente_it.php';
-  
-$database = new Database();
-$db = $database->getConnection();
-  
-$utente_it = new Utente_it($db);
-  
+
 // get posted data
 $data = json_decode(file_get_contents("php://input"));
 
@@ -26,6 +21,16 @@ if ($data->api_key != ApiKey::$apiKey) {
     ); 
     return;
 }
+$database = new Database();
+if(isset($data->isTest) && $data->isTest)
+{
+    $db = $database->getTestConnection();
+}else {
+    $db = $database->getConnection();  
+}
+  
+$utente_it = new Utente_it($db);
+  
 // make sure data is not empty
 if( !empty($data->email)&&		
 	!empty($data->userID) 

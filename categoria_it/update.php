@@ -11,13 +11,6 @@ include_once '../config/database.php';
 include_once '../config/apikey.php';
 include_once '../objects/categoria_it.php';
   
-// get database connection
-$database = new Database();
-$db = $database->getConnection();
-  
-// prepare categoria_it object
-$categoria_it = new Categoria_it($db);
-  
 // get id of categoria_it to be edited
 $data = json_decode(file_get_contents("php://input"));
 if ($data->api_key != ApiKey::$apiKey) {
@@ -27,6 +20,18 @@ if ($data->api_key != ApiKey::$apiKey) {
     ); 
     return;
 }
+// get database connection
+$database = new Database();
+if(isset($data->isTest) && $data->isTest)
+{
+    $db = $database->getTestConnection();
+}else {
+    $db = $database->getConnection();  
+}
+  
+// prepare categoria_it object
+$categoria_it = new Categoria_it($db);
+  
 // set ID property of categoria_it to be edited
 $categoria_it->categoria_id = $data->categoria_id;
   

@@ -11,7 +11,12 @@ include_once '../objects/localita_it.php';
   
 // instantiate database and localita_it object
 $database = new Database();
-$db = $database->getConnection();
+if(isset($data->isTest) && $data->isTest)
+{
+    $db = $database->getTestConnection();
+}else {
+    $db = $database->getConnection();  
+}
   
 // initialize object
 $localita_it = new Localita_it($db);

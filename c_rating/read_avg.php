@@ -8,7 +8,7 @@ header('Content-Type: application/json');
   
 // include database and object files
 include_once '../config/database.php';
-include_once '../objects/utente_it.php';
+include_once '../objects/c_rating.php';
 include_once '../config/apikey.php';
 
 $data = json_decode(file_get_contents("php://input"));
@@ -29,45 +29,36 @@ if(isset($data->isTest) && $data->isTest)
     $db = $database->getConnection();  
 }
 
-// prepare utente_it object
-$utente_it = new Utente_it($db);
-  
+// prepare c_rating object
+$c_rating = new C_rating($db);
+$c_rating->contatto_id = $data->contatto_id;  
 // set ID property of record to read
-$utente_it->userID = isset($_GET['userID']) ? $_GET['userID'] : die();
+// $c_rating->userID = isset($_GET['contatto_id']) ? $_GET['contatto_id'] : die();
   
-// read the details of utente_it to be edited
-$utente_it->readOne();
+// read the details of c_rating to be edited
+$c_rating->readAvg();
   
-if($utente_it->userID!=null){
+if($c_rating->contatto_id!=null){
     // create array
-   $utente_arr=array(
-            "utente_id" =>$utente_it->utente_id,
-            "userID"=>$utente_it->userID,
-            "nickname"=>$utente_it->nickname,
-            "email" =>$utente_it->email,
-            "tipo" =>$utente_it->tipo,
-			"data_PRU" =>$utente_it->data_PRU,
-			"data_URU" =>$utente_it->data_URU,	        
-			"vers" =>$utente_it->vers,
-			"so" =>$utente_it->so,
-			"ndr" =>$utente_it->ndr,
-            "tipo_reg" =>$utente_it->tipo_reg,
-			"createddate" =>$utente_it->createddate,
-			"lastmodified" =>$utente_it->lastmodified			
+   $c_rating_arr=array(
+            "rating_count" =>$c_rating->rating_count,
+            "contatto_id"=>$c_rating->contatto_id,
+            "rating_avg"=>$c_rating->rating_avg,
+            "rating_last" =>$c_rating->rating_last			
         );
   
     // set response code - 200 OK
     http_response_code(200);
   
     // make it json format
-    echo json_encode($utente_arr);
+    echo json_encode($c_rating_arr);
 }
   
 else{
     // set response code - 404 Not found
     http_response_code(404);  
 	
-    // tell the user utente_it does not exist
-    echo json_encode(array("message" => "utente_it does not exist."));
+    // tell the user c_rating does not exist
+    echo json_encode(array("message" => "c_rating does not exist."));
 }
 ?>

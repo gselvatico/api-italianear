@@ -24,7 +24,12 @@ if ($data->api_key != ApiKey::$apiKey) {
 }
   
 $database = new Database();
-$db = $database->getConnection();
+if(isset($data->isTest) && $data->isTest)
+{
+    $db = $database->getTestConnection();
+}else {
+    $db = $database->getConnection();  
+}
   
 $log_contatto_it = new Log_contatto_it($db);
   

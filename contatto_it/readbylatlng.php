@@ -10,15 +10,6 @@ header("Access-Control-Allow-Headers: Content-Type, Access-Control-Allow-Headers
 include_once '../config/database.php';
 include_once '../config/apikey.php';
 include_once '../objects/contatto_it.php';
-  
-// instantiate database and contatto_it object
-$database = new Database();
-$db = $database->getConnection();
-  
-// initialize object
-$contatto_it = new Contatto_it($db);
-// $contatto_it->loc_Id =str_replace("@","," , isset($_GET['l_id']) ? $_GET['l_id'] : die());
-// $contatto_it->cat_Id = isset($_GET['c_id']) ? $_GET['c_id'] : die();
 
 $data = json_decode(file_get_contents("php://input"));
 //$data = file_get_contents("php://input");
@@ -35,7 +26,21 @@ if ($data->api_key != ApiKey::$apiKey) {
         array("message" => "Chiave sbagliata")
     ); 
     return;
+}  
+// instantiate database and contatto_it object
+$database = new Database();
+if(isset($data->isTest) && $data->isTest)
+{
+    $db = $database->getTestConnection();
+}else {
+    $db = $database->getConnection();  
 }
+  
+// initialize object
+$contatto_it = new Contatto_it($db);
+// $contatto_it->loc_Id =str_replace("@","," , isset($_GET['l_id']) ? $_GET['l_id'] : die());
+// $contatto_it->cat_Id = isset($_GET['c_id']) ? $_GET['c_id'] : die();
+
 
 $stmt = $contatto_it->readByLatLng();
 // $num =0;

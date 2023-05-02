@@ -21,7 +21,12 @@ $data = json_decode(file_get_contents("php://input"));
 // }
 // instantiate database and categoria_it object
 $database = new Database();
-$db = $database->getConnection();
+if(isset($data->isTest) && $data->isTest)
+{
+    $db = $database->getTestConnection();
+}else {
+    $db = $database->getConnection();  
+}
   
 // initialize object
 $categoria_it = new Categoria_it($db);
