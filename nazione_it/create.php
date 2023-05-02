@@ -13,7 +13,12 @@ include_once '../config/database.php';
 include_once '../objects/nazione_it.php';
   
 $database = new Database();
-$db = $database->getConnection();
+if(isset($data->isTest) && $data->isTest)
+{
+    $db = $database->getTestConnection();
+}else {
+    $db = $database->getConnection();  
+}
   
 $nazione_it = new Nazione_it($db);
   

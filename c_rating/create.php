@@ -11,11 +11,6 @@ include_once '../config/database.php';
 include_once '../config/apikey.php';  
 include_once '../objects/c_rating.php';
   
-$database = new Database();
-$db = $database->getConnection();
-  
-$c_rating = new C_rating($db);
-  
 // get posted data
 $data = json_decode(file_get_contents("php://input"));
 
@@ -26,6 +21,24 @@ if ($data->api_key != ApiKey::$apiKey) {
     ); 
     return;
 }
+$database = new Database();
+if(isset($data->isTest) && $data->isTest)
+{
+    $db = $database->getTestConnection();
+}else {
+    $db = $database->getConnection();  
+}
+if(isset($data->isTest) && $data->isTest)
+{
+    $db = $database->getTestConnection();
+}else {
+    $db = $database->getConnection();  
+}
+
+  
+$c_rating = new C_rating($db);
+  
+
 // make sure data is not empty
 if( !empty($data->contatto_id)&&		
 	!empty($data->utente_id) &&

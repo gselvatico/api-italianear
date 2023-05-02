@@ -23,7 +23,12 @@ if ($data->api_key != ApiKey::$apiKey) {
     return;
 }
 $database = new Database();
-$db = $database->getConnection();
+if(isset($data->isTest) && $data->isTest)
+{
+    $db = $database->getTestConnection();
+}else {
+    $db = $database->getConnection();  
+}
   
 $log_it = new Log_it($db);
   

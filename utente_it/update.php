@@ -10,14 +10,7 @@ header("Access-Control-Allow-Headers: Content-Type, Access-Control-Allow-Headers
 include_once '../config/database.php';
 include_once '../config/apikey.php';
 include_once '../objects/utente_it.php';
-  
-// get database connection
-$database = new Database();
-$db = $database->getConnection();
-  
-// prepare utente_it object
-$utente_it = new Utente_it($db);
-  
+
 // get id of utente_it to be edited
 $data = json_decode(file_get_contents("php://input"));
 
@@ -28,6 +21,19 @@ if ($data->api_key != ApiKey::$apiKey) {
     ); 
     return;
 }
+// get database connection
+$database = new Database();
+if(isset($data->isTest) && $data->isTest)
+{
+    $db = $database->getTestConnection();
+}else {
+    $db = $database->getConnection();  
+}
+  
+// prepare utente_it object
+$utente_it = new Utente_it($db);
+  
+
 // set ID property of utente_it to be edited
 $utente_it->userID = $data->userID;
   

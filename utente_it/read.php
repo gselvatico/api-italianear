@@ -21,7 +21,12 @@ if ($data->api_key != ApiKey::$apiKey) {
 } 
 // instantiate database and utente_it object
 $database = new Database();
-$db = $database->getConnection();
+if(isset($data->isTest) && $data->isTest)
+{
+    $db = $database->getTestConnection();
+}else {
+    $db = $database->getConnection();  
+}
   
 // initialize object
 $utente_it = new Utente_it($db);

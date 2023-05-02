@@ -10,15 +10,7 @@ header("Access-Control-Allow-Headers: Content-Type, Access-Control-Allow-Headers
 include_once '../config/database.php';
 include_once '../config/apikey.php';
 include_once '../objects/c_rating.php';
-  
-// get database connection
-$database = new Database();
-$db = $database->getConnection();
-  
-// prepare c_rating object
-$c_rating = new C_rating($db);
-  
-// get id of c_rating to be edited
+// get posted data
 $data = json_decode(file_get_contents("php://input"));
 
 if ($data->api_key != ApiKey::$apiKey) {
@@ -27,7 +19,19 @@ if ($data->api_key != ApiKey::$apiKey) {
         array("message" => "Chiave sbagliata")
     ); 
     return;
+} 
+// get database connection
+$database = new Database();
+if(isset($data->isTest) && $data->isTest)
+{
+    $db = $database->getTestConnection();
+}else {
+    $db = $database->getConnection();  
 }
+  
+// prepare c_rating object
+$c_rating = new C_rating($db);
+  
 // set ID property of c_rating to be edited
 $c_rating->c_rating = $data->c_rating;
 $c_rating->description = $data->description;
