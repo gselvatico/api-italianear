@@ -13,11 +13,6 @@ include_once '../objects/contatto_it.php';
 
 $data = json_decode(file_get_contents("php://input"));
 //$data = file_get_contents("php://input");
-$contatto_it->lat_min= $data->lat_min;
-$contatto_it->lat_max = $data->lat_max;
-$contatto_it->lng_min= $data->lng_min;
-$contatto_it->lng_max = $data->lng_max;
-$contatto_it->cat_Id= $data->cat_id;
 
 
 if ($data->api_key != ApiKey::$apiKey) {
@@ -40,7 +35,11 @@ if(isset($data->isTest) && $data->isTest)
 $contatto_it = new Contatto_it($db);
 // $contatto_it->loc_Id =str_replace("@","," , isset($_GET['l_id']) ? $_GET['l_id'] : die());
 // $contatto_it->cat_Id = isset($_GET['c_id']) ? $_GET['c_id'] : die();
-
+$contatto_it->lat_min= $data->lat_min;
+$contatto_it->lat_max = $data->lat_max;
+$contatto_it->lng_min= $data->lng_min;
+$contatto_it->lng_max = $data->lng_max;
+$contatto_it->cat_Id= $data->cat_id;
 
 $stmt = $contatto_it->readByLatLng();
 // $num =0;
