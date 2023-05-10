@@ -33,7 +33,7 @@ $mail->Port = 587;
 $mail->CharSet = "UTF-8";
 
 
-$mail->setFrom('info@italianear.it', 'Info ItaliaNear');
+$mail->setFrom('info@italianear.it', 'ItaliaNear');
 $mail->addAddress($data->recipient, '');
 $mail->addBCC('italianear@gmail.com');
 $mail->isHTML(true);      
@@ -42,7 +42,7 @@ $mail->Body = "<p>Buongiorno $data->nickname,</p>
 <p>La tua presenza fra i contatti di $data->luogo è un contributo fondamentale per la creazione della rete ItaliaNear.
 <p>Nelle prossime ore verificheremo il corretto funzionamento della tua SCHEDA CONTATTO che d'ora in poi sarà visibile a tutti gli italiani che useranno la nostra APP e così quelli più vicini a te potranno facilmente raggiungerti.
 <p>Assicurati perciò di mantenere sempre aggiornati i tuoi riferimenti:
-<p>Nome contatto:	$data->nomecontatto</td></tr>
+<p>Nome contatto:<b>	$data->nomecontatto</b></td></tr>
 <table>
 <tr><td>Ruolo:</td><td><b>	$data->ruolo</b></td></tr>
 <tr><td>Note:</td><td><b>$data->note</b></td></tr>

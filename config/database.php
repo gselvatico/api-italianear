@@ -2,9 +2,12 @@
 class Database{
     // private $host = "185.81.4.196";
     // private $db_name = "italiare_italianear";
+    // private $db_test_name = "italiare_italianear_test";
     // private $username = "italiare_ut_near";
     // private $password = "ItA$20_21$";
-    private $host = "192.168.0.166";
+
+   
+    private $host = "192.168.1.66";
     private $db_name = "italiare_italianear";
     private $db_test_name = "italiare_italianear_test";
     private $username = "ut_liqui";

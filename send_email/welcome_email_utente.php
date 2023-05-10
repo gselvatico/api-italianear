@@ -33,7 +33,7 @@ $mail->Port = 587;
 $mail->CharSet = "UTF-8";
 
 
-$mail->setFrom('info@italianear.it', 'Info ItaliaNear');
+$mail->setFrom('info@italianear.it', 'ItaliaNear');
 $mail->addAddress($data->recipient, '');
 $mail->addBCC('italianear@gmail.com');
 // $mail->addAddress('picobellone@gmail.com', '');
