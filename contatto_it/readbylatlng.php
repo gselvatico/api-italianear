@@ -92,7 +92,10 @@ if($num>0){
             "father_id" => $father_id,
 			// "localita" => $localita,
 			"nazione" => $nazione,
-            "prefisso" => $prefisso
+            "prefisso" => $prefisso,
+            "avg_rating"=> $avg_rating,
+            "n_rating"=>$n_rating
+
         );
   
         array_push($contatto_its_arr["records"], $contatto_it_item);
