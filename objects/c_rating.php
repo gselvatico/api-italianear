@@ -16,6 +16,7 @@ class C_rating{
     public $rating_count;
     public $rating_avg;
     public $rating_last;
+    public $nickname;
 					
   
     // constructor with $db as database connection
@@ -59,7 +60,31 @@ class C_rating{
                 $this->lastmodified = $row['lastmodified']; 
             }  
     }
+    function read(){
+        // query to read single record
+      $query = "SELECT											
+                  p.c_rating_id,
+                  p.contatto_id,
+                  p.utente_id,
+                  p.c_rating,
+                  p.description,
+                  p.createddate,
+                  p.lastmodified,
+                  u.nickname
+              FROM
+                  " . $this->table_name . " p 
+            JOIN utente_it u USING(utente_id)
+            WHERE contatto_id = :contatto_id";
+        
+          // prepare query statement
+          $stmt = $this->conn->prepare( $query );
 
+          $stmt->bindParam(":contatto_id", $this->contatto_id);
+        
+          $stmt->execute();
+    
+          return $stmt;
+  }
     function readAvg(){
         $query = "SELECT		
                     COUNT(p.c_rating_id) rating_count,
