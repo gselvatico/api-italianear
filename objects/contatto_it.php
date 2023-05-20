@@ -192,11 +192,12 @@ class Contatto_it{
 							ON p.contatto_id = r.contatto_id
 				WHERE 
 					(p.latitudine between :latMin AND :latMax) 
-					AND (p.longitudine between :lngMin and :lngMax)
-				GROUP BY p.contatto_id " 
+					AND (p.longitudine between :lngMin and :lngMax)"
+					. $queryCategorie .
+				"GROUP BY p.contatto_id,n.nazione_id" 
 			// 		AND  p.categoria_id = :cat_id;               
 			;
-		$query =$query . $queryCategorie;
+		// $query =$query . $queryCategorie;
 	
 		// prepare query statement
 		$stmt = $this->conn->prepare( $query );  
