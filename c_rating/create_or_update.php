@@ -28,14 +28,7 @@ if(isset($data->isTest) && $data->isTest)
 }else {
     $db = $database->getConnection();  
 }
-if(isset($data->isTest) && $data->isTest)
-{
-    $db = $database->getTestConnection();
-}else {
-    $db = $database->getConnection();  
-}
 
-  
 $c_rating = new C_rating($db);
   
 
@@ -43,11 +36,7 @@ $c_rating = new C_rating($db);
 if( !empty($data->contatto_id)&&		
 	!empty($data->utente_id) &&
     !empty($data->c_rating)
-	//!empty($data->vers) &&
-	//!empty($data->so) &&
-	//!empty($data->ndr) &&
-	//!empty($data->createddate)	
-)
+    )
 { // set c_rating property values
     $c_rating->contatto_id= $data->contatto_id;
     $c_rating->utente_id= $data->utente_id;
@@ -56,7 +45,7 @@ if( !empty($data->contatto_id)&&
 	$c_rating->createddate = date('Y-m-d H:i:s');
   
     // create the c_rating
-    if($c_rating->create()){
+    if($c_rating->createOrUpdate()){
   
         // set response code - 201 created
         http_response_code(201);

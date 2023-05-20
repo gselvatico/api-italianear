@@ -113,7 +113,7 @@ class C_rating{
         }
     }
 
-    function create(){  
+    function createOrUpdate(){  
         // query to insert record
         $query = "INSERT INTO
                     " . $this->table_name . "
@@ -122,7 +122,8 @@ class C_rating{
                     utente_id=:utente_id,
                     c_rating=:c_rating,
                     description=:description,	       
-                    createddate=:createddate";
+                    createddate=:createddate
+                ON DUPLICATE KEY UPDATE c_rating=:c_rating,description=:description;";
 
         $stmt = $this->conn->prepare($query);
     
