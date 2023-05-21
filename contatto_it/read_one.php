@@ -66,8 +66,8 @@ if($contatto_it->contatto_id!=null){
 			"createddate" =>$contatto_it->createddate,
 			"lastmodified" =>$contatto_it->lastmodified,
 			"categoria" =>$contatto_it->categoria,
-			"avg_rating"=>$contatto_it->avg_rating,
-            "n_rating"=>$contatto_it->n_rating			
+			// "avg_rating"=>$contatto_it->avg_rating,
+            // "n_rating"=>$contatto_it->n_rating			
         );
   
     // set response code - 200 OK

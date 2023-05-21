@@ -78,9 +78,8 @@ class Contatto_it{
 					p.ndr,
 					p.createddate,
 					p.lastmodified,
-					c.categoria,
-					ifnull( AVG(r.c_rating),0) avg_rating,
-                    count(r.c_rating) n_rating
+					c.categoria
+					
 				FROM
 					" . $this->table_name . " p 
 					LEFT JOIN
@@ -88,8 +87,7 @@ class Contatto_it{
 							ON p.categoria_id = c.categoria_id				
 					INNER JOIN categoria_it f 
 							ON c.father_id =f.categoria_id
-					LEFT JOIN c_rating r
-							ON p.contatto_id = r.contatto_id				
+							
 				WHERE
 					p.userID = ?
 				";
@@ -132,8 +130,8 @@ class Contatto_it{
 			$this->createddate= $row['createddate'];
 			$this->lastmodified= $row['lastmodified'];
 			$this->categoria= $row['categoria'];	
-			$this->avg_rating= $row['avg_rating'];	
-			$this->n_rating= $row['n_rating'];	
+			// $this->avg_rating= $row['avg_rating'];	
+			// $this->n_rating= $row['n_rating'];	
 
 			}
 	}
@@ -174,28 +172,18 @@ class Contatto_it{
 					p.lastmodified,
 					c.categoria,
 					c.father_id,
-					f.categoria As categoria_father,
-					n.nazione,
-					n.prefisso,
-					ifnull( AVG(r.c_rating),0) avg_rating,
-                    count(r.c_rating) n_rating
+					f.categoria As categoria_father					
 				FROM
 					" . $this->table_name . " p 
 					LEFT JOIN
 						categoria_it c
-							ON p.categoria_id = c.categoria_id
-					LEFT JOIN nazione_it n
-							ON n.iso=p.nazioneiso
+							ON p.categoria_id = c.categoria_id					
 					INNER JOIN categoria_it f 
-							ON c.father_id =f.categoria_id
-					LEFT JOIN c_rating r
-							ON p.contatto_id = r.contatto_id
+							ON c.father_id =f.categoria_id					
 				WHERE 
 					(p.latitudine between :latMin AND :latMax) 
 					AND (p.longitudine between :lngMin and :lngMax)"
-					. $queryCategorie .
-				"GROUP BY p.contatto_id,n.nazione_id" 
-			// 		AND  p.categoria_id = :cat_id;               
+					. $queryCategorie 			           
 			;
 		// $query =$query . $queryCategorie;
 	

@@ -63,6 +63,7 @@ if($num>0){
         extract($row);
   
         $contatto_it_item=array(
+            "userID" => $userID,
             "contatto_id" => $contatto_id,
             "nome" => $nome,
             "email" => html_entity_decode($email),
@@ -91,10 +92,10 @@ if($num>0){
             "categoria_father" => $categoria_father,
             "father_id" => $father_id,
 			// "localita" => $localita,
-			"nazione" => $nazione,
-            "prefisso" => $prefisso,
-            "avg_rating"=> $avg_rating,
-            "n_rating"=>$n_rating
+			// "nazione" => $nazione,
+            // "prefisso" => $prefisso,
+            // "avg_rating"=> $avg_rating,
+            // "n_rating"=>$n_rating
 
         );
   
