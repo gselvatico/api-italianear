@@ -47,6 +47,7 @@ if($contatto_it->contatto_id!=null){
             "nome_negozio" =>$contatto_it->nome_negozio,
 			"categoria_id" =>$contatto_it->categoria_id,	
         	"localita" =>$contatto_it->localita,
+			"nazioneiso" =>$contatto_it->nazioneiso,
 			"indirizzo" =>$contatto_it->indirizzo,
 			"tel_prefix" =>$contatto_it->tel_prefix,
 			"telefono" =>$contatto_it->telefono,
@@ -65,10 +66,8 @@ if($contatto_it->contatto_id!=null){
 			"createddate" =>$contatto_it->createddate,
 			"lastmodified" =>$contatto_it->lastmodified,
 			"categoria" =>$contatto_it->categoria,
-			"localita" =>$contatto_it->localita,
-			"nazione" =>$contatto_it->nazione,
-			"nazioneiso" =>$contatto_it->nazioneiso,
-			"prefisso" =>$contatto_it->prefisso			
+			"avg_rating"=>$contatto_it->avg_rating,
+            "n_rating"=>$contatto_it->n_rating			
         );
   
     // set response code - 200 OK

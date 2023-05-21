@@ -79,21 +79,20 @@ class Contatto_it{
 					p.createddate,
 					p.lastmodified,
 					c.categoria,
-					c.father_id,		
-					n.nazione,
-					n.prefisso
+					ifnull( AVG(r.c_rating),0) avg_rating,
+                    count(r.c_rating) n_rating
 				FROM
-					" . $this->table_name . " p
+					" . $this->table_name . " p 
 					LEFT JOIN
 						categoria_it c
-							ON p.categoria_id = c.categoria_id
-					LEFT JOIN
-						nazione_it n
-							ON p.nazioneiso=n.ISO
+							ON p.categoria_id = c.categoria_id				
+					INNER JOIN categoria_it f 
+							ON c.father_id =f.categoria_id
+					LEFT JOIN c_rating r
+							ON p.contatto_id = r.contatto_id				
 				WHERE
 					p.userID = ?
-				LIMIT
-					0,1";
+				";
 	
 		// prepare query statement
 		$stmt = $this->conn->prepare( $query );
@@ -113,7 +112,9 @@ class Contatto_it{
 			$this->email= $row['email'];
 			$this->nome_negozio= $row['nome_negozio'];
 			$this->categoria_id= $row['categoria_id'];			
+			$this->localita= $row['localita'];
 			$this->indirizzo= $row['indirizzo'];
+			$this->nazioneiso= $row['nazioneiso'];
 			$this->tel_prefix= $row['tel_prefix'];
 			$this->telefono= $row['telefono'];
 			$this->email_c= $row['email_c'];
@@ -129,12 +130,11 @@ class Contatto_it{
 			$this->so= $row['so'];
 			$this->ndr= $row['ndr'];
 			$this->createddate= $row['createddate'];
-			$this->lastmodified= $row['lastmodified'];	
+			$this->lastmodified= $row['lastmodified'];
 			$this->categoria= $row['categoria'];	
-			$this->localita= $row['localita'];	
-			$this->nazione= $row['nazione'];	
-			$this->nazioneiso= $row['nazioneiso'];	
-			$this->prefisso= $row['prefisso'];	
+			$this->avg_rating= $row['avg_rating'];	
+			$this->n_rating= $row['n_rating'];	
+
 			}
 	}
 	function readByLatLng(){
