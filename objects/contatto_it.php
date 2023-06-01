@@ -172,12 +172,15 @@ class Contatto_it{
 					p.lastmodified,
 					c.categoria,
 					c.father_id,
-					f.categoria As categoria_father					
+					f.categoria As categoria_father,
+					n.nazione					
 				FROM
 					" . $this->table_name . " p 
 					LEFT JOIN
 						categoria_it c
-							ON p.categoria_id = c.categoria_id					
+							ON p.categoria_id = c.categoria_id
+					LEFT JOIN nazione_it n
+							ON n.iso=p.nazioneiso					
 					INNER JOIN categoria_it f 
 							ON c.father_id =f.categoria_id					
 				WHERE 

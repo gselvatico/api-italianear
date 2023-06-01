@@ -92,7 +92,7 @@ if($num>0){
             "categoria_father" => $categoria_father,
             "father_id" => $father_id,
 			// "localita" => $localita,
-			// "nazione" => $nazione,
+			 "nazione" => $nazione,
             // "prefisso" => $prefisso,
             // "avg_rating"=> $avg_rating,
             // "n_rating"=>$n_rating
