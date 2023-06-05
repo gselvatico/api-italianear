@@ -100,5 +100,37 @@ class Stats_it{
             $stmt->execute();
             return $stmt;	  
         }  
+        function log_iscrizioni(){
+           
+            $query = "SELECT 
+                        count(u.userid) n_u,
+                        count(c.userid) n_c, 
+                        date(data_PRU) data_iscrizione                      
+                        FROM 
+                            utente_it u 
+                        left JOIN contatto_it c using (userID)
+                        where DATE (u.data_PRU )
+                        between DATE(:dateMin) AND DATE(:dateMax)                        
+                        group by DATE( data_PRU)                 
+                        UNION 
+                        SELECT count(u.userid) n_u,count(c.userid) n_c, '--'
+                        FROM utente_it u 
+                        left JOIN contatto_it c using (userID)                         
+                        where 
+                            u.data_PRU >= :dateMin 
+                        AND 
+                            DATE(u.data_PRU)<=:dateMax
+                         ORDER BY data_iscrizione DESC
+                   "                  
+                ;
+            
+            $stmt = $this->conn->prepare( $query );      
+            $stmt->bindParam(":dateMin", $this->date_min);
+            $stmt->bindParam(":dateMax", $this->date_max);
+            
+            // execute query
+            $stmt->execute();
+            return $stmt;	  
+        } 
     }
     ?>
