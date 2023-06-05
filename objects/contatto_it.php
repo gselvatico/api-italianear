@@ -291,7 +291,7 @@ class Contatto_it{
 					latitudine=:latitudine,
 					longitudine=:longitudine,
 					nazioneiso=:nazioneiso,
-					immagine=IF(LENGTH(:immagine) > 10 ,:immagine,immagine),
+					immagine=IF(:immagine='no_image_set',NULL,IF(LENGTH(:immagine) > 10 ,:immagine,immagine)),
 					vers=:vers,
 					ndr=:ndr,
 					so=:so
