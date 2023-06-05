@@ -1,5 +1,6 @@
 <html>
 <head>
+    <meta name="robots" content="noindex">
     <title>Ricerche Italianear</title>
 </head>
 <body>
@@ -18,23 +19,49 @@
             }
     </style>
 <?php
-
+error_reporting(0);
+ini_set('display_errors', 0);
 include_once '../config/database.php';
-include_once '../config/apikey.php';
 include_once '../objects/stats_it.php';
 
+$dataMin;
+$dataMax;
+// $api_key = $_GET['apiKey'];
 
-$api_key = $_GET['apiKey'];
-$date_min = $_GET['datemin'];
-$date_max= $_GET['datemax'];
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    // Controlla se il campo "data" è stato inviato
+    if(isset($_POST["datamin"]) && !empty($_POST["datamin"])) {
+      $dataMin       = $_POST["datamin"];
+    //   echo "Hai selezionato la data: " . $dataMin    ;
+    } else {
+      echo "Errore: Il campo data iniziale non è stato inviato correttamente.";
+    }
+    if(isset($_POST["datamax"]) && !empty($_POST["datamax"])) {
+        $dataMax = $_POST["datamax"];
+      //   echo "Hai selezionato la data: " . $dataMin      ;
+      } else {
+        echo "Errore: Il campo data finale non è stato inviato correttamente.";
+      }
+    if(isset($_POST["pwd"]) && !empty($_POST["pwd"])) {
+        $pwd = $_POST["pwd"];
+        if ($pwd!=="C£ramno") {
+            die("La password non è corretta!");
+          }
+      //   echo "Hai selezionato la data: " . $dataMin      ;
+     } else {
+        echo "Errore: Il campo Password non è stato inviato correttamente.";
+      }
+    
+    
+  }
 
-if ($api_key != ApiKey::$apiKey) {
-    http_response_code(403);  
-    echo json_encode(
-        array("message" => "Chiave sbagliata")
-    ); 
-    return;
-}  
+$dateTime = DateTime::createFromFormat('d/m/Y', $dataMin);
+$date_min= $dateTime->format('Y-m-d');
+$dateTime = DateTime::createFromFormat('d/m/Y', $dataMax);
+$date_max = $dateTime->format('Y-m-d');
+
+
+
 // instantiate database and stats_it object
 $database = new Database();
 if(isset($data->isTest) && $data->isTest)
