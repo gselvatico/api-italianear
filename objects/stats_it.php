@@ -132,5 +132,42 @@ class Stats_it{
             $stmt->execute();
             return $stmt;	  
         } 
+        function contatti_vuoti(){
+            $query = "SELECT 
+                u.email,u.tipo,c.userID,c.lastmodified
+            FROM 
+                contatto_it c
+            inner join 
+                utente_it u using(userid)
+            where 
+                latitudine=0 and longitudine=0"                  
+            ;
+
+            $stmt = $this->conn->prepare( $query );      
+            // execute query
+            $stmt->execute();
+            return $stmt;	  
+        }
+        function elimina_contatto_vuoto($user_ID){
+            $esito;
+            $query = "UPDATE
+                 utente_it                
+            SET 
+                tipo = 'U'
+            where 
+                userID = :userID;
+            DELETE                
+            FROM 
+                contatto_it            
+            where 
+                userID = :userID;
+            ";    
+       
+             $stmt = $this->conn->prepare( $query );      
+             $stmt->bindParam(":userID", $user_ID);
+             $stmt->execute();            
+
+            return  'OK '.$user_ID;	  
+        }
     }
     ?>
