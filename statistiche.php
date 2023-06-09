@@ -51,16 +51,30 @@
     <!-- Contenuti della form... -->
     <input type="text" id="datepicker" placeholder="data iniziale" name="datamin" />
     <input type="text" id="datepickermax" placeholder="data finale" name="datamax" />
-    <br>
+
     <input type="text" name="pwd" placeholder="pwd" name=pwd" required>
-        
+    <br/>
     <!-- Pulsanti per inviare la form -->
-    <button type="submit" 
+    <button type="submit" style="width:150px"
         onclick="setFormAction('api\\stats_it\\log_contatti.php')">Log contatti
     </button>
-    <button type="submit" 
+    <br/>
+    <button type="submit" style="width:150px"
         onclick="setFormAction('api\\stats_it\\log_ricerche.php')">Log Ricerche
     </button>
+    <br/>
+    <button type="submit" style="width:150px"
+        onclick="setFormAction('api\\stats_it\\log_iscrizioni.php')">Log Iscrizioni
+    </button>
+    <br/>
+    <button type="submit" style="width:150px"
+        onclick="setFormAction('api\\stats_it\\log_contatti_nazione.php')">Contatti per nazione
+    </button>
+    <br/>
+    <button type="submit" style="width:150px"
+        onclick="setFormAction('api\\stats_it\\contatti_vuoti.php')">Contatti vuoti
+    </button>
+    
   </form>
 
 <?php

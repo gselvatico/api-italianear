@@ -18,7 +18,34 @@ class Stats_it{
     public function __construct($db){
         $this->conn = $db;
     }	
-        
+    function log_nazione(){
+        $query = "SELECT 
+        count(c.userid) n_c, 
+        c.nazioneiso,
+        MAX(c.createddate) data_iscrizione 
+        from contatto_it c 
+        where 
+            c.createddate >= :dateMin 
+        AND 
+            DATE(c.createddate) <= :dateMax            
+        group by c.nazioneiso            
+        UNION 
+        SELECT count(c.userid) n_c, '','--'
+        FROM  contatto_it c 
+        where 
+            c.createddate >= :dateMin 
+        AND 
+           DATE(c.createddate)<=:dateMax
+        "              
+        ;
+
+        $stmt = $this->conn->prepare( $query );    
+        $stmt->bindParam(":dateMin", $this->date_min);
+        $stmt->bindParam(":dateMax", $this->date_max);  
+        // execute query
+        $stmt->execute();
+        return $stmt;	  
+    }
         function log_ricerche(){
            
             $query = "SELECT				
@@ -169,5 +196,6 @@ class Stats_it{
 
             return  'OK '.$user_ID;	  
         }
+      
     }
     ?>
