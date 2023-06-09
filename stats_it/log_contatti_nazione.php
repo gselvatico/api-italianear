@@ -90,7 +90,7 @@ if($num>0){
   
         $stats_it_item=array(       
 			"nContatti" => $n_c,	
-            "Nazione" => $nazioneiso,	
+            "Nazione" => $nazione,	
             "data_iscrizione"=>date("d/m/Y", strtotime($data_iscrizione))
         );
   

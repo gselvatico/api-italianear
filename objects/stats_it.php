@@ -20,15 +20,16 @@ class Stats_it{
     }	
     function log_nazione(){
         $query = "SELECT 
-        count(c.userid) n_c, 
-        c.nazioneiso,
-        MAX(c.createddate) data_iscrizione 
+            count(c.userid) n_c, 
+            n.nazione,
+            MAX(c.createddate) data_iscrizione 
         from contatto_it c 
+        LEFT JOIN nazione_it n on n.ISO =c.nazioneiso
         where 
             c.createddate >= :dateMin 
         AND 
             DATE(c.createddate) <= :dateMax            
-        group by c.nazioneiso            
+        group by n.nazione            
         UNION 
         SELECT count(c.userid) n_c, '','--'
         FROM  contatto_it c 
