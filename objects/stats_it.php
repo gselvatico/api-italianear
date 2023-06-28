@@ -47,6 +47,43 @@ class Stats_it{
         $stmt->execute();
         return $stmt;	  
     }
+    function log_localita(){
+        $query = "        SELECT 
+            (@row_number := @row_number + 1)  n,
+            t.n_c,
+            t.localita,
+            t.data_iscrizione            
+        FROM
+            (SELECT 
+                COUNT(c.userid) AS n_c,
+                c.localita,
+                MAX(c.createddate) AS data_iscrizione,
+                COUNT(localita) AS n
+            FROM
+                contatto_it c      
+        where 
+            c.createddate >= :dateMin 
+        AND 
+            DATE(c.createddate) <= :dateMax            
+        group by c.localita ) as t,
+        (SELECT @row_number := 0) AS r           
+        UNION 
+        SELECT '', count(c.userid) n_c, @row_number ,''
+        FROM  contatto_it c 
+        where 
+            c.createddate >= :dateMin 
+        AND 
+           DATE(c.createddate)<=:dateMax
+        "              
+        ;
+
+        $stmt = $this->conn->prepare( $query );    
+        $stmt->bindParam(":dateMin", $this->date_min);
+        $stmt->bindParam(":dateMax", $this->date_max);  
+        // execute query
+        $stmt->execute();
+        return $stmt;	  
+    }
         function log_ricerche(){
            
             $query = "SELECT				

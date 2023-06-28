@@ -11,6 +11,9 @@ class C_rating{
     public $utente_id;
     public $c_rating;
     public $description;
+    public $replay;
+    public $enable_description;
+    public $enable_anser;
     public $createddate;
     public $lastmodified;
     public $rating_count;
@@ -27,17 +30,20 @@ class C_rating{
     function readOne(){
           // query to read single record
         $query = "SELECT											
-                    p.c_rating_id,
-                    p.contatto_id,
-                    p.utente_id,
-                    p.c_rating,
-                    p.description,
-                    p.createddate,
-                    p.lastmodified
+                    p.`c_rating_id`,
+                    p.`contatto_id`,
+                    p.`utente_id`,
+                    p.`c_rating`,
+                    p.`description`,
+                    p.`replay`,
+                    p.`enable_description`,
+                    p.`enable_replay`,
+                    p.`createddate`,
+                    p.`lastmodified`
                 FROM
                     " . $this->table_name . " p    
-                WHERE contatto_id = :contatto_id
-                AND utente_id = :utente_id
+                WHERE p.contatto_id = :contatto_id
+                AND p.utente_id = :utente_id
                 LIMIT 0,1";
           
             // prepare query statement
@@ -56,6 +62,8 @@ class C_rating{
                 $this->utente_id = $row['utente_id']; 
                 $this->c_rating = $row['c_rating']; 
                 $this->description = $row['description']; 
+                $this->enable_description = $row['enable_description']; 
+                $this->enable_replay = $row['enable_replay']; 
                 $this->createddate = $row['createddate']; 
                 $this->lastmodified = $row['lastmodified']; 
             }  
@@ -63,14 +71,17 @@ class C_rating{
     function read(){
         // query to read single record
       $query = "SELECT											
-                  p.c_rating_id,
-                  p.contatto_id,
-                  p.utente_id,
-                  p.c_rating,
-                  p.description,
-                  p.createddate,
-                  p.lastmodified,
-                  u.nickname
+                 p.`c_rating_id`,
+                 p.`contatto_id`,
+                 p.`utente_id`,
+                 p.`c_rating`,
+                 p.`description`,
+                 p.`replay`,
+                 p.`enable_description`,
+                 p.`enable_replay`,
+                 p.`createddate`,
+                 p.`lastmodified`
+                 u.nickname
               FROM
                   " . $this->table_name . " p 
             JOIN utente_it u USING(utente_id)
@@ -92,9 +103,11 @@ class C_rating{
                     AVG(p.c_rating) rating_avg,
                     MAX(p.lastmodified)  rating_last
                 FROM
-                    " . $this->table_name . " p              
+                    c_rating p              
                 WHERE
                     p.contatto_id = :contatto_id
+                AND
+                    p.enable_description <> 0
                 GROUP BY 
                     p.contatto_id";
     
@@ -116,14 +129,22 @@ class C_rating{
     function createOrUpdate(){  
         // query to insert record
         $query = "INSERT INTO
-                    " . $this->table_name . "
+                    c_rating
                 SET
                     contatto_id=:contatto_id,
                     utente_id=:utente_id,
                     c_rating=:c_rating,
-                    description=:description,	       
+                    description=:description,
+                    replay=:replay,
+                    enable_description =:enable_descritpion,
+                    enable_replay=:enable_replay,
                     createddate=:createddate
-                ON DUPLICATE KEY UPDATE c_rating=:c_rating,description=:description;";
+                ON DUPLICATE KEY UPDATE 
+                    c_rating=:c_rating,
+                    description=:description
+                    replay=:replay,
+                    enable_description =:enable_descritpion,
+                    enable_replay=:enable_replay;";
 
         $stmt = $this->conn->prepare($query);
     
@@ -133,6 +154,9 @@ class C_rating{
         $stmt->bindParam(":utente_id", $this->utente_id);
         $stmt->bindParam(":c_rating", $this->c_rating);
         $stmt->bindParam(":description", $this->description);
+        $stmt->bindParam(":replay", $this->replay);
+        $stmt->bindParam(":enable_description", $this->enable_description);
+        $stmt->bindParam(":enable_replay", $this->enable_replay);
         $stmt->bindParam(":createddate", $this->createddate);	
         
         // execute query
@@ -145,12 +169,16 @@ class C_rating{
 
     function update(){  
         // update query
-        $query = "UPDATE " . $this->table_name . "
-                SET               
-                    c_rating=:c_rating,
-                    description=:description			
-                WHERE contatto_id = :contatto_id
-                AND utente_id= :utente_id";
+        $query = "UPDATE 
+                      c_rating
+                  SET               
+                      c_rating=:c_rating,
+                      description=:description,
+                      replay=:replay,
+                      enable_description=:enable_description,
+                      enable_replay=:enable_replay		
+                  WHERE contatto_id = :contatto_id
+                  AND utente_id= :utente_id";
     
         // prepare query statement
         $stmt = $this->conn->prepare($query);
@@ -163,6 +191,9 @@ class C_rating{
 
         $stmt->bindParam(":c_rating", $this->c_rating);
         $stmt->bindParam(":description", $this->description);
+        $stmt->bindParam(":replay", $this->replay);
+        $stmt->bindParam(":enable_description", $this->enable_description);
+        $stmt->bindParam(":enable_replay", $this->enable_replay);
         $stmt->bindParam(":contatto_id", $this->contatto_id);
         $stmt->bindParam(":utente_id", $this->utente_id);
         

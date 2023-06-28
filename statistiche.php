@@ -19,7 +19,9 @@
     </script>
     <script>
         function setFormAction(action) {
-        document.getElementById('myForm').action = action;
+            var form = document.getElementById('myForm');
+            form.action = action;
+            form.target = '_blank';
         }
     </script>
 </head>
