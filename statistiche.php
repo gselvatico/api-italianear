@@ -70,6 +70,14 @@
     </button>
     <br/>
     <button type="submit" style="width:150px"
+        onclick="setFormAction('api\\stats_it\\log_iscrizioni_vers.php')">Log Iscrizioni per versione app
+    </button>
+    <br/>
+    <button type="submit" style="width:150px"
+        onclick="setFormAction('api\\stats_it\\log_iscrizioni_so.php')">Log Iscrizioni per sistema operativo
+    </button>
+    <br/>
+    <button type="submit" style="width:150px"
         onclick="setFormAction('api\\stats_it\\log_contatti_nazione.php')">Contatti per nazione
     </button>
     <br/>

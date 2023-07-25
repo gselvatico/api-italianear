@@ -197,6 +197,54 @@ class Stats_it{
             $stmt->execute();
             return $stmt;	  
         } 
+        function log_iscrizioni_vers(){
+           
+            $query = "SELECT 
+                        count(u.userid) n_u,
+                        LEFT(so,3) so,
+                        vers,
+                        date(data_PRU) data_iscrizione                      
+                        FROM 
+                            utente_it u                           
+                        where 
+                            u.data_PRU >= :dateMin 
+                        AND 
+                            DATE(u.data_PRU)<=:dateMax
+                        group by vers,  LEFT(so,3) ,data_iscrizione
+                        ORDER BY data_iscrizione DESC
+                   "                  
+                ;
+            
+            $stmt = $this->conn->prepare( $query );      
+            $stmt->bindParam(":dateMin", $this->date_min);
+            $stmt->bindParam(":dateMax", $this->date_max);
+            
+            // execute query
+            $stmt->execute();
+            return $stmt;	  
+        } 
+         function log_iscrizioni_so(){
+           
+            $query = "SELECT 
+                        count(u.userid) n_u,
+                        LEFT(so,3) so
+                        FROM 
+                            utente_it u                           
+                        where 
+                            u.data_PRU >= :dateMin 
+                        AND 
+                            DATE(u.data_PRU)<=:dateMax
+                        group by LEFT(so,3)                        
+                   ";
+            
+            $stmt = $this->conn->prepare( $query );      
+            $stmt->bindParam(":dateMin", $this->date_min);
+            $stmt->bindParam(":dateMax", $this->date_max);
+            
+            // execute query
+            $stmt->execute();
+            return $stmt;	  
+        } 
         function contatti_vuoti(){
             $query = "SELECT 
                 u.email,u.tipo,c.userID,c.lastmodified
