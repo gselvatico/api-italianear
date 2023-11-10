@@ -149,8 +149,13 @@ class Stats_it{
                         log_contatto_it l
                     JOIN 
                         contatto_it c USING (contatto_id)
+                    JOIN
+	                    utente_it u using (utente_id)
                     WHERE 
                         l.createdtime between :dateMin AND :dateMax
+                        AND u.email NOT LIKE '%@italianear.it'
+                        AND u.email NOT LIKE 'g.selvatico%'
+                        AND u.email NOT LIKE 'picobellone%'
                     GROUP BY 
                         l.contatto_id
                     ORDER BY nUtenti DESC;                    
