@@ -95,6 +95,7 @@ class Stats_it{
                         JOIN utente_it u using (userid)
                         WHERE 
                         l.createddate between :dateMin AND :dateMax
+                        AND u.is_admin = 0
                         GROUP BY u.userID
                         ORDER BY max(l.createddate) DESC			
                    "                  
@@ -153,9 +154,7 @@ class Stats_it{
 	                    utente_it u using (utente_id)
                     WHERE 
                         l.createdtime between :dateMin AND :dateMax
-                        AND u.email NOT LIKE '%@italianear.it'
-                        AND u.email NOT LIKE 'g.selvatico%'
-                        AND u.email NOT LIKE 'picobellone%'
+                        AND u.is_admin = 0
                     GROUP BY 
                         l.contatto_id
                     ORDER BY nUtenti DESC;                    

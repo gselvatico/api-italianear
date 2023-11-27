@@ -52,6 +52,7 @@ if($utente_it->userID!=null){
 			"so" =>$utente_it->so,
 			"ndr" =>$utente_it->ndr,
             "tipo_reg" =>$utente_it->tipo_reg,
+            "is_admin"=>$utente_it->is_admin,
 			"createddate" =>$utente_it->createddate,
 			"lastmodified" =>$utente_it->lastmodified			
         );

@@ -17,6 +17,7 @@ class Utente_it{
 	public $so;
 	public $ndr;
     public $tipo_reg;
+    public $is_admin;
 	public $createddate;
 	public $lastmodified;
 					
@@ -70,6 +71,7 @@ class Utente_it{
                     p.so,
                     p.ndr,
                     p.tipo_reg,
+                    p.is_admin,
                     p.createddate,
                     p.lastmodified
                 FROM
@@ -103,6 +105,7 @@ class Utente_it{
         $this->so= $row['so'];
         $this->ndr= $row['ndr'];
         $this->tipo_reg= $row['tipo_reg'];
+        $this->is_admin= $row['is_admin'];
         $this->createddate= $row['createddate'];
         $this->lastmodified= $row['lastmodified'];
     }
