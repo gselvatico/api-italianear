@@ -82,6 +82,10 @@
     </button>
     <br/>
     <button type="submit" style="width:150px"
+        onclick="setFormAction('api\\stats_it\\log_contatti_localita.php')">Contatti per localita
+    </button>
+    <br/>
+    <button type="submit" style="width:150px"
         onclick="setFormAction('api\\stats_it\\contatti_vuoti.php')">Contatti vuoti
     </button>
     
