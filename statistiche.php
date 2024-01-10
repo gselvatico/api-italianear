@@ -24,6 +24,41 @@
             form.target = '_blank';
         }
     </script>
+    <script>
+        // Funzione per ottenere l'ultimo giorno di un mese
+        function getLastDayOfMonth(year, month) {
+            return new Date(year, month + 1, 0).getDate();
+        }
+
+        // Funzione per aggiornare le date iniziali e finali in base alla selezione
+        function updateDates() {
+             var selectedMonth =  parseInt(document.getElementById("month").value);
+            var selectedYear = document.getElementById("year").value;
+
+            var startDate = new Date(selectedYear, selectedMonth, 1);
+            var nextMonth = selectedMonth + 1;
+            var endDate = new Date(selectedYear, nextMonth, 1);
+            endDate.setDate(endDate.getDate() - 1);
+
+            // Formattare le date come stringhe nel formato "yyyy-mm-dd"
+            var formattedStartDate = formatDate(startDate);
+            var formattedEndDate = formatDate(endDate);
+
+            document.getElementById("datepicker").value = formattedStartDate;
+            document.getElementById("datepickermax").value = formattedEndDate;
+        }
+        function formatDate(date) {
+            var day = date.getDate();
+            var month = date.getMonth() + 1;
+            var year = date.getFullYear();
+
+            // Aggiungi zeri iniziali se necessario
+            day = day < 10 ? '0' + day : day;
+            month = month < 10 ? '0' + month : month;
+
+            return day + '/' + month + '/' + year;
+        }
+    </script>
 </head>
 <body>
 <style>
@@ -50,10 +85,35 @@
   
 </form> -->
 <form id="myForm" method="post" action="">
-    <!-- Contenuti della form... -->
+  <label for="month">Mese:</label>
+    <select id="month" onchange="updateDates()">
+        <option value="0">Gennaio</option>
+        <option value="1">Febbraio</option>
+        <option value="2">Marzo</option>
+        <option value="3">Aprile</option>
+        <option value="4">Maggio</option>
+        <option value="5">Giugno</option>
+        <option value="6">Luglio</option>
+        <option value="7">Agosto</option>
+        <option value="8">Settembre</option>
+        <option value="9">Ottobre</option>
+        <option value="10">Novembre</option>
+        <option value="11">Dicembre</option>
+    </select>
+
+    <label for="year">Anno:</label>
+    <select id="year" onchange="updateDates()">
+         <?php
+        $currentYear = date('Y');
+        for ($i = $currentYear; $i >= 2022; $i--) {
+            echo "<option value=\"$i\">$i</option>";
+        }
+        ?>
+    </select>
+
+    <br>
     <input type="text" id="datepicker" placeholder="data iniziale" name="datamin" />
     <input type="text" id="datepickermax" placeholder="data finale" name="datamax" />
-
     <input type="text" name="pwd" placeholder="pwd" name=pwd" required>
     <br/>
     <!-- Pulsanti per inviare la form -->
