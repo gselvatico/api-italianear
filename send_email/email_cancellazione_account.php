@@ -17,7 +17,13 @@ if ($data->api_key != ApiKey::$apiKey) {
     ); 
     return;
 }
-
+$isContatto =  $data->is_contatto;
+$testoSchedaContatto="";
+$oggetto="Cancellazione account utente ItaliaNear";
+ if($isContatto == "true") {       
+    $testoSchedaContatto=" e la scheda contatto ad esso associata";
+    $oggetto="Cancellazione account contatto ItaliaNear";
+}
 //Create an instance; passing `true` enables exceptions
 $mail = new PHPMailer(true);
 // $mail->SMTPDebug = SMTP::DEBUG_SERVER;  
@@ -39,9 +45,9 @@ $mail->addBCC('italianear@gmail.com');
 // $mail->addAddress('picobellone@gmail.com', '');
 // $mail->addAddress('u.ricci@gmail.com', '');
 $mail->isHTML(true);      
-$mail->Subject = 'Cancellazione account ItaliaNear';
+$mail->Subject = $oggetto;
 $mail->Body = "<p>Buongiorno $data->nickname,</p>
-<p>Come da tua richiesta abbiamo provveduto a cancellare il tuo account e l'eventuale scheda contatto ad esso associata.</p>
+<p>Come da tua richiesta abbiamo provveduto a cancellare il tuo account$testoSchedaContatto.</p>
 <p>Ricorda che, in qualsiasi momento, potrai creare un nuovo account ItaliaNear, anche con lo stesso indirizzo e-mail.</p>
 <p>Per ogni eventualità ti ricordiamo i nostri riferimenti:</p>
 <p>e-mail: info@italianear.it</p>
