@@ -20,11 +20,9 @@ if ($data->api_key != ApiKey::$apiKey) {
 
 //Create an instance; passing `true` enables exceptions
 $mail = new PHPMailer(true);
-// $mail->SMTPDebug = SMTP::DEBUG_SERVER;  
 $mail->isSMTP();
-// $mail->Host = 'mail.italianear.it';
 $mail->Host = 'italianear.it';
-// $mail->Host = 'smtp.gmail.com';
+
 $mail->SMTPAuth = true;
 $mail->Username = ApiKey::$usermail;
 $mail->Password = ApiKey::$mailpwd;
@@ -34,27 +32,30 @@ $mail->CharSet = "UTF-8";
 
 
 $mail->setFrom('info@italianear.it', 'ItaliaNear');
-$mail->addAddress($data->recipient, '');
-$mail->addBCC('italianear@gmail.com');
-// $mail->addAddress('picobellone@gmail.com', '');
-// $mail->addAddress('u.ricci@gmail.com', '');
+$mail->addAddress('italianear@gmail.com');
+//$mail->addAddress('picobellone@gmail.com');
 $mail->isHTML(true);      
-$mail->Subject = 'Benvenuto da ItaliaNear';
-$mail->Body = "<p>Buongiorno $data->nickname,</p>
-<p>Grazie per la tua registrazione!</p>
-<p>Condividi con noi la tua esperienza di utente ItaliaNear: facci sapere che cosa pensi della nostra app e segnalaci eventuali anomalie o suggerimenti per migliorarne il funzionamento.</p>
-<p>Ecco i nostri riferimenti:</p>
-<p>e-mail: info@italianear.it</p>
-<p>Web site: https://italianear.it/</p>
-<p>Un cordiale saluto</p>
-
-<p>Il team ItaliaNear</p>
-<p><a href=\"https://www.youtube.com/channel/UCZwgxMhRcQUJwufKFy8bjlA\"> YouTube</a><br/>	
-<a href=\"https://www.facebook.com/ItaliaNear.it\"> Facebook</a><br/>
-<a href=\"https://twitter.com/ItaliaNear\"> X (Twitter)</a><br/>
-<a href=\"https://www.instagram.com/italianear\"> Instagram</a><br/>
-<a href=\"https://www.linkedin.com/company/italianear/\"> LinkedIn</a><br/>
-<a href=\"https://open.spotify.com/show/53n3PWA7xlFrVEOpAY5DU4\"> Spotify</a></p>	";
+$mail->Subject = 'Annullamento scheda contatto di ItaliaNear';
+$mail->Body = "Il contatto $data->nickname,</p>
+<p>con email: $data->recipient</p>
+<p> ha abortito la registrazione</p>
+<p>Questi sono i dati che aveva compilato:
+<table>
+<tr><td>Nome contatto:</td><td><b>	$data->nomecontatto</b></td></tr>
+<tr><td>categoria id:</td><td><b>	$data->categoriaid</b></td></tr>
+<tr><td>latitudine:</td><td><b>$data->latitudine</b></td></tr>
+<tr><td>longitudine:</td><td><b>$data->longitudine</b></td></tr>
+<tr><td>nome attivita</td><td><b>$data->nomeattivita</b>	</td></tr>
+<tr><td>indirizzo</td><td><b>$data->indirizzo</b></td></tr>
+<tr><td>luogo</td><td><b>$data->luogo</b></td></tr>
+<tr><td>nazione</td><td><b>$data->nazione</b></td></tr>
+<tr><td>Ruolo:</td><td><b>	$data->ruolo</b></td></tr>
+<tr><td>Telefono:</td><td><b>$data->prefix <b>$data->telefono</b></td></tr>
+<tr><td>e-mail:	</td><td><b>$data->email</b></td></tr>
+<tr><td>Sito web:</td><td><b>$data->sitoweb</b></td></tr>
+<tr><td>Note:</td><td><b>$data->note</b></td></tr>
+</table>
+";
 
 // echo json_encode(array("message" => "OK.")); 
 try {
