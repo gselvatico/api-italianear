@@ -32,13 +32,14 @@ $mail->CharSet = "UTF-8";
 
 
 $mail->setFrom('info@italianear.it', 'ItaliaNear');
-$mail->addAddress('italianear@gmail.com');
-//$mail->addAddress('picobellone@gmail.com');
+//$mail->addAddress('italianear@gmail.com');
+$mail->addAddress('picobellone@gmail.com');
 $mail->isHTML(true);      
 $mail->Subject = 'Annullamento scheda contatto di ItaliaNear';
 $mail->Body = "Il contatto $data->nickname,</p>
 <p>con email: $data->recipient</p>
 <p> ha abortito la registrazione</p>
+<p>Causa : $data->apiMessage</p>
 <p>Questi sono i dati che aveva compilato:
 <table>
 <tr><td>Nome contatto:</td><td><b>	$data->nomecontatto</b></td></tr>

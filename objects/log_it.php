@@ -25,63 +25,63 @@ class Log_it{
 	
     function read(){
   
-    // select all query
-    $query = "SELECT								
-				p.log_id,
-                p.userID,
-                p.gps,
-                p.lista_categorie,
-                p.ricerca_gps,
-                p.lista_contatti,
-                p.tipo_utente,
-                p.vers,
-                p.so,
-                p.ndr,
-                p.createddate
-            FROM
-                " . $this->table_name . " p ";
-  
-    // prepare query statement
-    $stmt = $this->conn->prepare($query);
-  
-    // execute query
-    $stmt->execute();
-  
-    return $stmt;
+        // select all query
+        $query = "SELECT								
+                    p.log_id,
+                    p.userID,
+                    p.gps,
+                    p.lista_categorie,
+                    p.ricerca_gps,
+                    p.lista_contatti,
+                    p.tipo_utente,
+                    p.vers,
+                    p.so,
+                    p.ndr,
+                    p.createddate
+                FROM
+                    " . $this->table_name . " p ";
+    
+        // prepare query statement
+        $stmt = $this->conn->prepare($query);
+    
+        // execute query
+        $stmt->execute();
+    
+        return $stmt;
 	}
 
     function create(){  
-    // query to insert record
-    $query = "INSERT INTO
-                " . $this->table_name . "
-            SET               
-            userID=:userID,
-            gps=:gps,
-            lista_categorie=:lista_categorie,
-            ricerca_gps=:ricerca_gps,
-            lista_contatti=:lista_contatti,          
-            vers=:vers,
-            so=:so";
-    // prepare qcreateddate,query
-    $stmt = $this->conn->prepare($query);
-  
-     // bind values
-	
-	$stmt->bindParam(":userID", $this->userID);	
-	$stmt->bindParam(":gps", $this->gps);	
-	$stmt->bindParam(":lista_categorie", $this->lista_categorie);	
-    $stmt->bindParam(":ricerca_gps", $this->ricerca_gps);	
-    $stmt->bindParam(":lista_contatti", $this->lista_contatti);	
-  //  $stmt->bindParam(":tipo_utente", $this->tipo_utente);	
-    $stmt->bindParam(":vers", $this->vers);	
-    $stmt->bindParam(":so", $this->so);	
- //    $stmt->bindParam(":ndr", $this->ndr);	
-    // execute query
-    if($stmt->execute()){
-        return true;
-    }
-  
-    return false;
+        // query to insert record
+        $query = "INSERT INTO
+                    " . $this->table_name . "
+                SET               
+                userID=:userID,
+                gps=:gps,
+                lista_categorie=:lista_categorie,
+                ricerca_gps=:ricerca_gps,
+                lista_contatti=:lista_contatti,          
+                vers=:vers,
+                so=:so";
+        // prepare qcreateddate,query
+        $stmt = $this->conn->prepare($query);
+    
+        // bind values
+        
+        $stmt->bindParam(":userID", $this->userID);	
+        $stmt->bindParam(":gps", $this->gps);	
+        $stmt->bindParam(":lista_categorie", $this->lista_categorie);	
+        $stmt->bindParam(":ricerca_gps", $this->ricerca_gps);	
+        $stmt->bindParam(":lista_contatti", $this->lista_contatti);	
+    //  $stmt->bindParam(":tipo_utente", $this->tipo_utente);	
+        $stmt->bindParam(":vers", $this->vers);	
+        $stmt->bindParam(":so", $this->so);	
+    //    $stmt->bindParam(":ndr", $this->ndr);	
+        // execute query
+        if($stmt->execute()){
+            return true;
+        }
+    
+        return false;
 	}   
 }
 ?>

@@ -84,8 +84,7 @@ class Stats_it{
         $stmt->execute();
         return $stmt;	  
     }
-        function log_ricerche(){
-           
+    function log_ricerche(){
             $query = "SELECT				
                         u.email,
                         count(l.userid) nlog,
@@ -108,8 +107,8 @@ class Stats_it{
             // execute query
             $stmt->execute();
             return $stmt;	  
-        }    
-        function totali_log_ricerche(){
+    }    
+    function totali_log_ricerche(){
       
             $query = "select
                  (SELECT COUNT(distinct(userid))  
@@ -138,8 +137,8 @@ class Stats_it{
                 $this->totaleRicerche= $row['t'];
             }
             
-        }  
-        function log_contatti(){
+    }  
+    function log_contatti(){
            
             $query = "SELECT count(l.utente_id) nUtenti, 
                         c.nome nome_contatto,
@@ -168,8 +167,8 @@ class Stats_it{
             // execute query
             $stmt->execute();
             return $stmt;	  
-        }  
-        function log_iscrizioni(){
+    }  
+    function log_iscrizioni(){
            
             $query = "SELECT 
                         count(u.userid) n_u,
@@ -200,8 +199,8 @@ class Stats_it{
             // execute query
             $stmt->execute();
             return $stmt;	  
-        } 
-        function log_iscrizioni_vers(){
+    } 
+    function log_iscrizioni_vers(){
            
             $query = "SELECT 
                         count(u.userid) n_u,
@@ -226,8 +225,8 @@ class Stats_it{
             // execute query
             $stmt->execute();
             return $stmt;	  
-        } 
-         function log_iscrizioni_so(){
+    } 
+    function log_iscrizioni_so(){
            
             $query = "SELECT 
                         count(u.userid) n_u,
@@ -248,8 +247,8 @@ class Stats_it{
             // execute query
             $stmt->execute();
             return $stmt;	  
-        } 
-        function contatti_vuoti(){
+    } 
+    function contatti_vuoti(){
             $query = "SELECT 
                 u.email,u.tipo,c.userID,c.lastmodified
             FROM 
@@ -264,8 +263,8 @@ class Stats_it{
             // execute query
             $stmt->execute();
             return $stmt;	  
-        }
-        function elimina_contatto_vuoto($user_ID){
+    }
+    function elimina_contatto_vuoto($user_ID){
             $esito;
             $query = "UPDATE
                  utente_it                
@@ -285,7 +284,48 @@ class Stats_it{
              $stmt->execute();            
 
             return  'OK '.$user_ID;	  
-        }
-      
+    }
+    function log_contatto_click(){
+           
+            $query = "SELECT count(l.contatto_id) n_click,
+                    MAX(createdtime) ultimo,                      
+                                ( SELECT count(distinct l.utente_id)
+                                FROM 
+                                    log_contatto_it  l
+                                JOIN 
+                                    contatto_it c USING (contatto_id)	
+                                join
+                                    utente_it u using (utente_id)
+                                WHERE                         
+                                    c.userID = :userID
+                                and   u.is_admin = 0
+                            ) n_utenti
+                    FROM 
+                        log_contatto_it  l
+					JOIN 
+                        contatto_it c USING (contatto_id)
+					JOIN
+	                    utente_it u using (utente_id)
+                    WHERE                         
+                        c.userID = :userID
+                       AND u.is_admin = 0                                   
+                   "                  
+                ;
+               $stmt = $this->conn->prepare( $query );
+
+            $stmt->bindParam(":userID", $this->userID);   
+          
+            $stmt->execute();
+          
+            $row = $stmt->fetch(PDO::FETCH_ASSOC);
+            if($row!=null){
+            // set values to object properties
+                $this->n_click = $row['n_click']; 
+                $this->ultimo = $row['ultimo']; 
+                $this->n_utenti = $row['n_utenti'];   
+            }  
+           
+          return $stmt;
+    }   
     }
     ?>
