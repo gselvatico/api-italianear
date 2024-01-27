@@ -38,10 +38,11 @@ $mail->isHTML(true);
 $mail->Subject = 'Annullamento scheda contatto di ItaliaNear';
 $mail->Body = "<p>Buongiorno $data->nickname,</p>
 
-<p>ti scriviamo perché ci risulta un tuo tentativo di registrazione come contatto, che però non è andato a buon fine.<br/>
+<p>ti scriviamo perché abbiamo rilevato un tuo tentativo di registrazione come contatto, che però non è andato a buon fine.<br/>
 Se non era tua intenzione registrarti come contatto, ignora pure questo messaggio.<br/>
-Altrimenti puoi rispondere a questa email indicandoci i tuoi dati: provvederemo noi a compilare la tua scheda contatto che poi potrai modificare, aggiornare o cancellare in completa autonomia.</p>
-<p>I dati richiesti sono:</p>
+Altrimenti ti preghiamo di farci sapere se qualcosa ti ha dissuaso dal completare la tua registrazione o se hai riscontrato un problema che ti ha impedito di portarla a termine.<br/>
+In tal caso, possiamo provvedere noi a compilare la tua scheda che poi potrai modificare, aggiornare o cancellare in completa autonomia.</p>
+<p>Sarà sufficiente che tu ci fornisca, per e-mail, i seguenti dati:</p>
 <p>- Nome<br/>
 - Ruolo<br/>
 - Tipo di attività<br/>
@@ -50,16 +51,20 @@ Altrimenti puoi rispondere a questa email indicandoci i tuoi dati: provvederemo 
 - Località<br/>
 - Numero telefonico (preferibilmente WhatsApp) completo di prefisso internazionale</p>
 
-<p>Ringraziandoti per la collaborazione e scusandoci per l'inconveniente, ti porgiamo i nostri più cordiali saluti</p>
+<p>Scusandoci per l'inconveniente e ringraziandoti per la collaborazione, restiamo in attesa di un tuo riscontro.</p>
 <p></p>
-<p>Per ogni eventualità ti ricordiamo i nostri riferimenti:</p>
-<p>e-mail: info@italianear.it</p>
-<p>Web site: https://italianear.it/</p>
+<p><i>Assistenza Contatti <br/>
+       ItaliaNear</i></p>
 
-<p>Assistenza Contatti ItaliaNear</p>
+       <img src='https://italianear.it/images/italianear_Hi-res_Icon_512.png' width='66' height='66'>
+       
+<p>Per ogni eventualità ti ricordiamo i nostri riferimenti:</p>
+<p>e-mail: info@italianear.it<br/>
+Web site: https://italianear.it/</p>
+
 <p><a href=\"https://www.youtube.com/channel/UCZwgxMhRcQUJwufKFy8bjlA\"> YouTube</a><br/>	
 <a href=\"https://www.facebook.com/ItaliaNear.it\"> Facebook</a><br/>
-<a href=\"https://twitter.com/ItaliaNear\"> Twitter</a><br/>
+<a href=\"https://twitter.com/ItaliaNear\"> X (Twitter)</a><br/>
 <a href=\"https://www.instagram.com/italianear\"> Instagram</a><br/>
 <a href=\"https://www.linkedin.com/company/italianear/\"> LinkedIn</a><br/>
 <a href=\"https://open.spotify.com/show/53n3PWA7xlFrVEOpAY5DU4\"> Spotify</a></p>	";
