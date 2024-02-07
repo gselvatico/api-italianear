@@ -67,6 +67,10 @@ Web site: https://italianear.it/</p>
 <a href=\"https://www.instagram.com/italianear\"> Instagram</a><br/>
 <a href=\"https://www.linkedin.com/company/italianear/\"> LinkedIn</a><br/>
 <a href=\"https://open.spotify.com/show/53n3PWA7xlFrVEOpAY5DU4\"> Spotify</a></p>	";
+if ($data->result !== null) {  
+    $mail->Body .= "Risposta del server = $data->result";
+} 
+
 // echo json_encode(array("message" => "OK.")); 
 try {
     if(!$mail->send()) {
