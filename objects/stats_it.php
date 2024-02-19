@@ -112,15 +112,15 @@ class Stats_it{
       
             $query = "select
                  (SELECT COUNT(distinct(userid))  
-                       FROM italiare_italianear.log_it l
+                       FROM log_it l
                        join utente_it u using (userid)
                   WHERE 
-                  l.createddate between :dateMin AND :dateMax) n,
+                  l.createddate between :dateMin AND :dateMax  AND u.is_admin = 0) n,
                 (SELECT COUNT(userid)
-                        FROM italiare_italianear.log_it l
+                        FROM log_it l
                         join utente_it u using (userid)
                     WHERE 
-                    l.createddate between :dateMin AND :dateMax) t;			
+                    l.createddate between :dateMin AND :dateMax  AND u.is_admin = 0) t;			
                    "                  
                 ;
             
