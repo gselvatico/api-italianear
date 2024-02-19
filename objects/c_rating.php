@@ -13,7 +13,7 @@ class C_rating{
     public $description;
     public $replay;
     public $enable_description;
-    public $enable_anser;
+    public $enable_replay;
     public $createddate;
     public $lastmodified;
     public $rating_count;
@@ -80,7 +80,7 @@ class C_rating{
                  p.`enable_description`,
                  p.`enable_replay`,
                  p.`createddate`,
-                 p.`lastmodified`
+                 p.`lastmodified`,
                  u.nickname
               FROM
                   " . $this->table_name . " p 
@@ -134,26 +134,26 @@ class C_rating{
                     contatto_id=:contatto_id,
                     utente_id=:utente_id,
                     c_rating=:c_rating,
-                    description=:description,
+                    description=:udescription,
                     replay=:replay,
-                    enable_description =:enable_descritpion,
+                    enable_description=:enable_description,
                     enable_replay=:enable_replay,
                     createddate=:createddate
                 ON DUPLICATE KEY UPDATE 
                     c_rating=:c_rating,
-                    description=:description
+                    description=:udescription,
                     replay=:replay,
-                    enable_description =:enable_descritpion,
+                    enable_description=:enable_description,
                     enable_replay=:enable_replay;";
 
         $stmt = $this->conn->prepare($query);
     
-        $this->email=htmlspecialchars(strip_tags($this->description));   
+        $this->description=htmlspecialchars(strip_tags($this->description));   
     
         $stmt->bindParam(":contatto_id", $this->contatto_id);
         $stmt->bindParam(":utente_id", $this->utente_id);
         $stmt->bindParam(":c_rating", $this->c_rating);
-        $stmt->bindParam(":description", $this->description);
+        $stmt->bindParam(":udescription", $this->description);
         $stmt->bindParam(":replay", $this->replay);
         $stmt->bindParam(":enable_description", $this->enable_description);
         $stmt->bindParam(":enable_replay", $this->enable_replay);
