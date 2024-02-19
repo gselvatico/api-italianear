@@ -22,13 +22,14 @@
             }
     </style>
 <?php
-// error_reporting(0);
+error_reporting(E_ALL & ~E_NOTICE);
 // ini_set('display_errors', 0);
 include_once '../config/database.php';
 include_once '../objects/stats_it.php';
 
 $dataMin;
 $dataMax;
+
 // $api_key = $_GET['apiKey'];
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
@@ -57,7 +58,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     
     
   }
-
+// echo $dataMin;
+// echo $dataMax;
 $dateTime = DateTime::createFromFormat('d/m/Y', $dataMin);
 $date_min= $dateTime->format('Y-m-d');
 $dateTime = DateTime::createFromFormat('d/m/Y', $dataMax);
@@ -87,7 +89,7 @@ $stmt = $stats_it->log_iscrizioni();
 // //******** */ fine totali***********
 
 $num =$stmt->rowCount();
-  
+// echo $num;  
 // check if more than 0 record found
 if($num>0){
   

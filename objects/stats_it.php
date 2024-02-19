@@ -175,15 +175,15 @@ class Stats_it{
                         count(c.userid) n_c, 
                         date(data_PRU) data_iscrizione                      
                         FROM 
-                            utente_it u 
-                        left JOIN contatto_it c using (userID)
+                            (utente_it u                         
+                        left join `contatto_it` `c` on((convert(`u`.`userID` using utf8mb4) = `c`.`userID`))) 
                         where DATE (u.data_PRU )
                         between DATE(:dateMin) AND DATE(:dateMax)                        
                         group by DATE( data_PRU)                 
                         UNION 
                         SELECT count(u.userid) n_u,count(c.userid) n_c, '--'
-                        FROM utente_it u 
-                        left JOIN contatto_it c using (userID)                         
+                        FROM (utente_it u                         
+                        left join `contatto_it` `c` on((convert(`u`.`userID` using utf8mb4) = `c`.`userID`)))                      
                         where 
                             u.data_PRU >= :dateMin 
                         AND 
@@ -252,9 +252,8 @@ class Stats_it{
             $query = "SELECT 
                 u.email,u.tipo,c.userID,c.lastmodified
             FROM 
-                contatto_it c
-            inner join 
-                utente_it u using(userid)
+                (utente_it u                         
+                inner join `contatto_it` `c` on((convert(`u`.`userID` using utf8mb4) = `c`.`userID`))) 
             where 
                 latitudine=0 and longitudine=0"                  
             ;
