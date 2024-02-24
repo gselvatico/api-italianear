@@ -61,7 +61,8 @@ class C_rating{
                 $this->contatto_id = $row['contatto_id']; 
                 $this->utente_id = $row['utente_id']; 
                 $this->c_rating = $row['c_rating']; 
-                $this->description = $row['description']; 
+                $this->description = $row['description'];
+                $this->replay = $row['replay']; 
                 $this->enable_description = $row['enable_description']; 
                 $this->enable_replay = $row['enable_replay']; 
                 $this->createddate = $row['createddate']; 
@@ -95,7 +96,7 @@ class C_rating{
           $stmt->execute();
     
           return $stmt;
-  }
+    }
     function readAvg(){
         $query = "SELECT		
                     COUNT(p.c_rating_id) rating_count,
@@ -223,6 +224,69 @@ class C_rating{
         // execute query
         if($stmt->execute()){
             return true;
+        }
+    
+        return false;
+    }
+    function readAll($par){
+        // query to read single record
+      $query = "SELECT											
+                 p.`c_rating_id`,
+                 p.`contatto_id`,
+                 p.`utente_id`,
+                 p.`c_rating`,
+                 p.`description`,
+                 p.`replay`,
+                 p.`enable_description`,
+                 p.`enable_replay`,
+                 p.`createddate`,
+                 p.`lastmodified`,
+                 c.nome_negozio,
+                 c.localita,
+                 u.nickname
+              FROM
+                 c_rating  p
+                   JOIN utente_it u USING(utente_id)
+                   join `contatto_it` `c` using (contatto_id)
+            ";
+        if($par == 'rating')
+            {
+                $query .= " WHERE p.`enable_description` = 0 ";
+                $query .= " ORDER BY p.createddate DESC ";
+            } 
+        if($par == 'dateinifine')
+            {
+                $query .= " WHERE p.createddate >= :dateMin";
+                $query .= " AND p.createddate <= :dateMax";
+                $query .= " ORDER BY p.createddate DESC ";
+              
+            } 
+             
+        // prepare query statement
+        
+        $stmt = $this->conn->prepare( $query );
+        if($par == 'dateinifine')
+            {
+                 $stmt->bindParam(":dateMin", $this->date_min);
+                 $stmt->bindParam(":dateMax", $this->date_max); 
+            }
+        $stmt->execute();
+        // $row = $stmt->fetch(PDO::FETCH_ASSOC);
+        return $stmt;
+    }
+    function autorizza_description($c_rating_id){
+        $esito;
+        // delete query
+        $query = "UPDATE  c_rating 
+                    SET enable_description = 1 
+                 WHERE c_rating_id = :c_rating_id
+               ;";
+    
+        // prepare query
+        $stmt = $this->conn->prepare($query);  
+        $stmt->bindParam(":c_rating_id",$c_rating_id);
+        if($stmt->execute()){
+            return  'OK ' . $c_rating_id;
         }
     
         return false;

@@ -148,7 +148,14 @@
     <button type="submit" style="width:150px"
         onclick="setFormAction('api\\stats_it\\contatti_vuoti.php')">Contatti vuoti
     </button>
-    
+    <br/>
+    <button type="submit" style="width:150px"
+        onclick="setFormAction('api\\c_rating\\rating_check.php')">Autorizza Rating 
+    </button>
+    <br/>
+    <button type="submit" style="width:150px"
+        onclick="setFormAction('api\\c_rating\\ratings.php')">Tutti i Rating 
+    </button>
   </form>
 
 <?php
