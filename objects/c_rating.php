@@ -291,6 +291,34 @@ class C_rating{
     
         return false;
     }
+    function addReplay(){  
+        // update query
+        $query = "UPDATE 
+                      c_rating
+                  SET
+                      replay=:replay,                      
+                      enable_replay=0 
+                  WHERE c_rating_id = :rating_id;";
+    
+        // prepare query statement
+        $stmt = $this->conn->prepare($query);
+    
+        // sanitize
+        $this->email=htmlspecialchars(strip_tags($this->description));  
+    
+        // bind new values
+    
+        $stmt->bindParam(":rating_id", $this->c_rating_id);     
+        $stmt->bindParam(":replay", $this->replay);
+    
+        
+        // execute the query
+        if($stmt->execute()){
+            return true;
+        }
+    
+        return false;
+    }
 }
 ?>
 
