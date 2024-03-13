@@ -54,7 +54,7 @@ if($num>0){
             "utente_id" => $utente_id,
             "c_rating" => $c_rating,
             "description" => $description,
-            "reply" => $replay,
+            "replay" => $replay,
             "enable_description" => $enable_description,
             "enable_replay" => $enable_replay,
 			"createddate" => $createddate,

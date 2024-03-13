@@ -254,6 +254,11 @@ class C_rating{
                 $query .= " WHERE p.`enable_description` = 0 ";
                 $query .= " ORDER BY p.createddate DESC ";
             } 
+        if($par == 'replay')
+            {
+                $query .= " WHERE p.`enable_replay` = 0 ";
+                $query .= " ORDER BY p.createddate DESC ";
+            } 
         if($par == 'dateinifine')
             {
                 $query .= " WHERE p.createddate >= :dateMin";
@@ -291,6 +296,25 @@ class C_rating{
     
         return false;
     }
+    function autorizza_replay($c_rating_id){
+        $esito;
+        // delete query
+        $query = "UPDATE  c_rating 
+                    SET enable_replay = 1 
+                 WHERE c_rating_id = :c_rating_id
+               ;";
+    
+        // prepare query
+        $stmt = $this->conn->prepare($query);  
+        $stmt->bindParam(":c_rating_id",$c_rating_id);
+        if($stmt->execute()){
+            return  'OK ' . $c_rating_id;
+        }
+    
+        return false;
+    }
+
+
     function addReplay(){  
         // update query
         $query = "UPDATE 

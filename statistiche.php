@@ -154,6 +154,10 @@
     </button>
     <br/>
     <button type="submit" style="width:150px"
+        onclick="setFormAction('api\\c_rating\\rating_replay_check.php')">Autorizza Risposta al rating 
+    </button>
+    <br/>
+    <button type="submit" style="width:150px"
         onclick="setFormAction('api\\c_rating\\ratings.php')">Tutti i Rating 
     </button>
   </form>
