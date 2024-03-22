@@ -150,6 +150,10 @@
     </button>
     <br/>
     <button type="submit" style="width:150px"
+        onclick="setFormAction('api\\stats_it\\contatti_per_categoria.php')">Contatti Per Categoria
+    </button>
+    <br/>
+    <button type="submit" style="width:150px"
         onclick="setFormAction('api\\c_rating\\rating_check.php')">Autorizza Rating 
     </button>
     <br/>

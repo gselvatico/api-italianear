@@ -326,5 +326,20 @@ class Stats_it{
            
           return $stmt;
     }   
+    function contatti_per_categoria(){
+           
+            $query = "SELECT COUNT(*) n,fa.categoria,ca.categoria father
+                        from contatto_it co
+                        JOIN categoria_it ca USING(categoria_id)
+                        JOIN categoria_it fa on ca.father_id=fa.categoria_id
+                        GROUP by ca.categoria_id,fa.categoria_id
+                        ORDER BY n DESC;                      
+                   ";
+            
+            $stmt = $this->conn->prepare( $query );      
+            // execute query
+            $stmt->execute();
+            return $stmt;	  
+    }     
     }
     ?>
