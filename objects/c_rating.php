@@ -14,6 +14,8 @@ class C_rating{
     public $replay;
     public $enable_description;
     public $enable_replay;
+    public $reject_description;
+    public $reject_replay;
     public $createddate;
     public $lastmodified;
     public $rating_count;
@@ -38,6 +40,8 @@ class C_rating{
                     p.`replay`,
                     p.`enable_description`,
                     p.`enable_replay`,
+                    p.`reject_description`,
+                    p.`reject_replay`,
                     p.`createddate`,
                     p.`lastmodified`
                 FROM
@@ -65,6 +69,8 @@ class C_rating{
                 $this->replay = $row['replay']; 
                 $this->enable_description = $row['enable_description']; 
                 $this->enable_replay = $row['enable_replay']; 
+                $this->reject_description = $row['reject_description']; 
+                $this->reject_replay = $row['reject_replay']; 
                 $this->createddate = $row['createddate']; 
                 $this->lastmodified = $row['lastmodified']; 
             }  
@@ -80,6 +86,8 @@ class C_rating{
                  p.`replay`,
                  p.`enable_description`,
                  p.`enable_replay`,
+                 p.`reject_description`,
+                 p.`reject_replay`,
                  p.`createddate`,
                  p.`lastmodified`,
                  u.nickname
@@ -139,13 +147,17 @@ class C_rating{
                     replay=:replay,
                     enable_description=:enable_description,
                     enable_replay=:enable_replay,
+                    reject_description=:reject_description,
+                    reject_replay=:reject_replay,
                     createddate=:createddate
                 ON DUPLICATE KEY UPDATE 
                     c_rating=:c_rating,
                     description=:udescription,
                     replay=:replay,
                     enable_description=:enable_description,
-                    enable_replay=:enable_replay;";
+                    enable_replay=:enable_replay,
+                    reject_description=:reject_description,
+                    reject_replay=:reject_replay;";
 
         $stmt = $this->conn->prepare($query);
     
@@ -158,6 +170,8 @@ class C_rating{
         $stmt->bindParam(":replay", $this->replay);
         $stmt->bindParam(":enable_description", $this->enable_description);
         $stmt->bindParam(":enable_replay", $this->enable_replay);
+        $stmt->bindParam(":reject_description", $this->reject_description);
+        $stmt->bindParam(":reject_replay", $this->reject_replay);
         $stmt->bindParam(":createddate", $this->createddate);	
         
         // execute query
@@ -177,7 +191,9 @@ class C_rating{
                       description=:description,
                       replay=:replay,
                       enable_description=:enable_description,
-                      enable_replay=:enable_replay		
+                      enable_replay=:enable_replay,
+                      reject_description=:reject_description,
+                      reject_replay=:reject_replay
                   WHERE contatto_id = :contatto_id
                   AND utente_id= :utente_id";
     
@@ -195,6 +211,8 @@ class C_rating{
         $stmt->bindParam(":replay", $this->replay);
         $stmt->bindParam(":enable_description", $this->enable_description);
         $stmt->bindParam(":enable_replay", $this->enable_replay);
+        $stmt->bindParam(":reject_description", $this->reject_description);
+        $stmt->bindParam(":reject_replay", $this->reject_replay);
         $stmt->bindParam(":contatto_id", $this->contatto_id);
         $stmt->bindParam(":utente_id", $this->utente_id);
         
@@ -239,6 +257,8 @@ class C_rating{
                  p.`replay`,
                  p.`enable_description`,
                  p.`enable_replay`,
+                 p.`reject_description`,
+                 p.`reject_replay`,
                  p.`createddate`,
                  p.`lastmodified`,
                  c.nome_negozio,
@@ -252,11 +272,24 @@ class C_rating{
         if($par == 'rating')
             {
                 $query .= " WHERE p.`enable_description` = 0 ";
+                $query .= " AND p.`reject_description` = 0 ";
                 $query .= " ORDER BY p.createddate DESC ";
             } 
         if($par == 'replay')
             {
-                $query .= " WHERE p.`enable_replay` = 0 ";
+                $query .= " WHERE p.`enable_description` = 1 ";
+                $query .= " AND p.`enable_replay` = 0 ";
+                $query .= " AND p.`reject_replay` = 0 ";
+                $query .= " ORDER BY p.createddate DESC ";
+            } 
+         if($par == 'reject_description')
+            {
+                $query .= " WHERE p.`reject_description` = 1 ";
+                $query .= " ORDER BY p.createddate DESC ";
+            } 
+         if($par == 'reject_replay')
+            {
+                $query .= " WHERE p.`reject_replay` = 1 ";
                 $query .= " ORDER BY p.createddate DESC ";
             } 
         if($par == 'dateinifine')
@@ -313,7 +346,40 @@ class C_rating{
     
         return false;
     }
-
+   function reject_description($c_rating_id){
+        $esito;
+        // delete query
+        $query = "UPDATE  c_rating 
+                    SET reject_description = 1 
+                 WHERE c_rating_id = :c_rating_id
+               ;";
+    
+        // prepare query
+        $stmt = $this->conn->prepare($query);  
+        $stmt->bindParam(":c_rating_id",$c_rating_id);
+        if($stmt->execute()){
+            return  'OK ' . $c_rating_id;
+        }
+    
+        return false;
+    }
+    function reject_replay($c_rating_id){
+        $esito;
+        // delete query
+        $query = "UPDATE  c_rating 
+                    SET reject_replay = 1 
+                 WHERE c_rating_id = :c_rating_id
+               ;";
+    
+        // prepare query
+        $stmt = $this->conn->prepare($query);  
+        $stmt->bindParam(":c_rating_id",$c_rating_id);
+        if($stmt->execute()){
+            return  'OK ' . $c_rating_id;
+        }
+    
+        return false;
+    }
 
     function addReplay(){  
         // update query

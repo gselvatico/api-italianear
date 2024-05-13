@@ -27,8 +27,8 @@
         }
     </script>
 <?php
-error_reporting(0);
-ini_set('display_errors', 0);
+error_reporting(1);
+ini_set('display_errors', 1);
 include_once '../config/database.php';
 include_once '../objects/c_rating.php';
 
@@ -101,6 +101,8 @@ if($num>0){
             "replay"=>$replay,
             "enable_description"=>$enable_description,
             "enable_replay"=>$enable_replay,
+            "reject_description"=>$reject_description,
+            "reject_replay"=>$reject_replay,
             "nickname"=>$nickname,
             "nome_negozio"=>$nome_negozio,
             "localita"=>$localita,
@@ -142,7 +144,9 @@ if($num>0){
         <th>Commento</th>
         <th>Risposta</th>
         <th>Autorizza commento</th>
-        <th>Autorizza Risposta</th>
+        <th>Autorizza risposta</th>
+        <th>respingi commento</th>
+        <th>respingi risposta</th>
         <th>nickname</th>
         <th>attività</th>
         <th>luogo</th>
@@ -162,6 +166,8 @@ if($num>0){
             echo '<td>' . $record['replay'] . '</td>';
             echo '<td>' . $record['enable_description'] . '</td>';
             echo '<td>' . $record['enable_replay'] . '</td>';
+            echo '<td>' . $record['reject_description'] . '</td>';
+            echo '<td>' . $record['reject_replay'] . '</td>';
             echo '<td>' . $record['nickname'] . '</td>';   
             echo '<td>' . $record['nome_negozio'] . '</td>';
             echo '<td>' . $record['localita'] . '</td>'; 

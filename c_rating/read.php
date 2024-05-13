@@ -57,6 +57,8 @@ if($num>0){
             "replay" => $replay,
             "enable_description" => $enable_description,
             "enable_replay" => $enable_replay,
+            "reject_description"=>$reject_description,
+            "reject_replay"=>$reject_replay,
 			"createddate" => $createddate,
 			"lastmodified" => $lastmodified,
             "nickname" => $nickname		

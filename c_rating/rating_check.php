@@ -26,6 +26,11 @@
         document.getElementById('myForm').action = action;
         }
     </script>
+     <script>
+        function setActionReject(url) {       
+          window.location.href = url;
+        }
+    </script>
 <?php
 error_reporting(0);
 ini_set('display_errors', 0);
@@ -81,6 +86,8 @@ if($num>0){
             "replay"=>$replay,
             "enable_description"=>$enable_description,
             "enable_replay"=>$enable_replay,
+            "reject_description"=>$reject_description,
+            "reject_replay"=>$reject_replay,
             "nickname"=>$nickname,
             "nome_negozio"=>$nome_negozio,
             "localita"=>$localita,
@@ -113,7 +120,7 @@ if($num>0){
         echo '<h2>Rating da autorizzare</h2>';
         echo '<form id="myForm" method="post" action="">';
         // Genera la tabella HTML
-        echo '<table style: font-family: Arial, sans-serif;
+        echo '<table  border=1  style=" border-collapse:collapse" style: font-family: Arial, sans-serif;
         font-size: 8px; >';
         echo '<thead><tr>';
         // <th>c_rating_id</th>
@@ -122,8 +129,10 @@ if($num>0){
         echo '<th>c_rating</th>
         <th>description</th>
         <th>replay</th>
-        <th>enable_description</th>
-        <th>enable_replay</th>
+        <th>autorizza description</th>
+        <th>autorizza replay</th>
+        <th>respingi description</th>
+        <th>respingi replay</th>
         <th>nickname</th>
         <th>attività</th>
         <th>luogo</th>
@@ -134,7 +143,8 @@ if($num>0){
         foreach ($records as $record) {
             // echo '<tr><td>'.$nr.'</td></tr>';
             $parametro=$record['c_rating_id'];
-            $cmd="'autorizza_description.php?c_rating_id=$parametro')";
+            $cmdAuth="'autorizza_description.php?c_rating_id=$parametro')";
+            $cmdRej="'reject_description.php?c_rating_id=$parametro')";
             echo '<tr>';
             // echo '<td>' . $record['c_rating_id'] . '</td>';
             // echo '<td>' . $record['contatto_id'] . '</td>';
@@ -144,14 +154,21 @@ if($num>0){
             echo '<td>' . $record['replay'] . '</td>';
             echo '<td>' . $record['enable_description'] . '</td>';
             echo '<td>' . $record['enable_replay'] . '</td>';
+            echo '<td>' . $record['reject_description'] . '</td>';
+            echo '<td>' . $record['reject_replay'] . '</td>';
             echo '<td>' . $record['nickname'] . '</td>';   
             echo '<td>' . $record['nome_negozio'] . '</td>';
             echo '<td>' . $record['localita'] . '</td>'; 
             echo '<td>' . htmlspecialchars($record['lastmodified']) . '</td>';
             echo '<td><button type="submit" onclick="setFormAction(';
-            echo $cmd;
+            echo $cmdAuth;
             echo '"';
             echo '>autorizza</button></td>';
+            echo '<td><button type="button" onclick="setActionReject(';
+            echo $cmdRej;
+            echo '"';
+            echo '>respingi</button></td>';
+            
             echo '</tr>';
             $nr=$nr+1;
         }
