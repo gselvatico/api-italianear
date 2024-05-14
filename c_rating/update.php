@@ -34,7 +34,7 @@ $c_rating = new C_rating($db);
   
 // set ID property of c_rating to be edited
 $c_rating->c_rating = $data->c_rating;
-$c_rating->description = $data->description;
+$c_rating->comment = $data->comment;
 $c_rating->contatto_id = $data->contatto_id;
 $c_rating->utente_id = $data->utente_id;
 

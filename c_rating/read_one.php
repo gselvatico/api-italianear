@@ -46,7 +46,7 @@ $c_rating->readOne();
             "contatto_id"=>$c_rating->contatto_id,
             "utente_id"=>$c_rating->utente_id,
             "c_rating" =>$c_rating->c_rating,
-            "description" =>$c_rating->description,
+            "comment" =>$c_rating->comment,
 			"createddate" =>$c_rating->createddate,
 			"lastmodified" =>$c_rating->lastmodified			
         );

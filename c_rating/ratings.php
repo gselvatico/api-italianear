@@ -97,11 +97,11 @@ if($num>0){
 			"contatto_id" => $contatto_id,
 			"utente_id" => $utente_id,
             "c_rating"=>$c_rating,
-            "description"=>$description,
+            "comment"=>$comment,
             "replay"=>$replay,
-            "enable_description"=>$enable_description,
+            "enable_comment"=>$enable_comment,
             "enable_replay"=>$enable_replay,
-            "reject_description"=>$reject_description,
+            "reject_comment"=>$reject_comment,
             "reject_replay"=>$reject_replay,
             "nickname"=>$nickname,
             "nome_negozio"=>$nome_negozio,
@@ -156,17 +156,17 @@ if($num>0){
         echo '<tbody>';
         foreach ($records as $record) {
             // $parametro=$record['c_rating_id'];
-            // $cmd="'autorizza_description.php?c_rating_id=$parametro')";
+            // $cmd="'autorizza_comment.php?c_rating_id=$parametro')";
             echo '<tr>';
             // echo '<td>' . $record['c_rating_id'] . '</td>';
             // echo '<td>' . $record['contatto_id'] . '</td>';
             // echo '<td>' . $record['utente_id'] . '</td>';                 
             echo '<td>' . $record['c_rating'] . '</td>';
-            echo '<td>' . $record['description'] . '</td>';
+            echo '<td>' . $record['comment'] . '</td>';
             echo '<td>' . $record['replay'] . '</td>';
-            echo '<td>' . $record['enable_description'] . '</td>';
+            echo '<td>' . $record['enable_comment'] . '</td>';
             echo '<td>' . $record['enable_replay'] . '</td>';
-            echo '<td>' . $record['reject_description'] . '</td>';
+            echo '<td>' . $record['reject_comment'] . '</td>';
             echo '<td>' . $record['reject_replay'] . '</td>';
             echo '<td>' . $record['nickname'] . '</td>';   
             echo '<td>' . $record['nome_negozio'] . '</td>';

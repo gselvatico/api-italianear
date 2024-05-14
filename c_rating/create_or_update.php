@@ -41,11 +41,11 @@ if( !empty($data->contatto_id)&&
     $c_rating->contatto_id= $data->contatto_id;
     $c_rating->utente_id= $data->utente_id;
 	$c_rating->c_rating= $data->c_rating;
-	$c_rating->description = $data->description;
+	$c_rating->comment = $data->comment;
     $c_rating->replay = $data->replay;
-    $c_rating->enable_description = $data->enable_description;
+    $c_rating->enable_comment = $data->enable_comment;
     $c_rating->enable_replay = $data->enable_replay;
-    $c_rating->reject_description = $data->reject_description;
+    $c_rating->reject_comment = $data->reject_comment;
     $c_rating->reject_replay = $data->reject_replay;
 	$c_rating->createddate = date('Y-m-d H:i:s');
   

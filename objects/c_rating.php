@@ -10,11 +10,11 @@ class C_rating{
     public $contatto_id;
     public $utente_id;
     public $c_rating;
-    public $description;
+    public $comment;
     public $replay;
-    public $enable_description;
+    public $enable_comment;
     public $enable_replay;
-    public $reject_description;
+    public $reject_comment;
     public $reject_replay;
     public $createddate;
     public $lastmodified;
@@ -36,11 +36,11 @@ class C_rating{
                     p.`contatto_id`,
                     p.`utente_id`,
                     p.`c_rating`,
-                    p.`description`,
+                    p.`comment`,
                     p.`replay`,
-                    p.`enable_description`,
+                    p.`enable_comment`,
                     p.`enable_replay`,
-                    p.`reject_description`,
+                    p.`reject_comment`,
                     p.`reject_replay`,
                     p.`createddate`,
                     p.`lastmodified`
@@ -65,11 +65,11 @@ class C_rating{
                 $this->contatto_id = $row['contatto_id']; 
                 $this->utente_id = $row['utente_id']; 
                 $this->c_rating = $row['c_rating']; 
-                $this->description = $row['description'];
+                $this->comment = $row['comment'];
                 $this->replay = $row['replay']; 
-                $this->enable_description = $row['enable_description']; 
+                $this->enable_comment = $row['enable_comment']; 
                 $this->enable_replay = $row['enable_replay']; 
-                $this->reject_description = $row['reject_description']; 
+                $this->reject_comment = $row['reject_comment']; 
                 $this->reject_replay = $row['reject_replay']; 
                 $this->createddate = $row['createddate']; 
                 $this->lastmodified = $row['lastmodified']; 
@@ -82,11 +82,11 @@ class C_rating{
                  p.`contatto_id`,
                  p.`utente_id`,
                  p.`c_rating`,
-                 p.`description`,
+                 p.`comment`,
                  p.`replay`,
-                 p.`enable_description`,
+                 p.`enable_comment`,
                  p.`enable_replay`,
-                 p.`reject_description`,
+                 p.`reject_comment`,
                  p.`reject_replay`,
                  p.`createddate`,
                  p.`lastmodified`,
@@ -116,7 +116,7 @@ class C_rating{
                 WHERE
                     p.contatto_id = :contatto_id
                 AND
-                    p.enable_description <> 0
+                    p.enable_comment <> 0
                 GROUP BY 
                     p.contatto_id";
     
@@ -143,34 +143,34 @@ class C_rating{
                     contatto_id=:contatto_id,
                     utente_id=:utente_id,
                     c_rating=:c_rating,
-                    description=:udescription,
+                    comment=:ucomment,
                     replay=:replay,
-                    enable_description=:enable_description,
+                    enable_comment=:enable_comment,
                     enable_replay=:enable_replay,
-                    reject_description=:reject_description,
+                    reject_comment=:reject_comment,
                     reject_replay=:reject_replay,
                     createddate=:createddate
                 ON DUPLICATE KEY UPDATE 
                     c_rating=:c_rating,
-                    description=:udescription,
+                    comment=:ucomment,
                     replay=:replay,
-                    enable_description=:enable_description,
+                    enable_comment=:enable_comment,
                     enable_replay=:enable_replay,
-                    reject_description=:reject_description,
+                    reject_comment=:reject_comment,
                     reject_replay=:reject_replay;";
 
         $stmt = $this->conn->prepare($query);
     
-        $this->description=htmlspecialchars(strip_tags($this->description));   
+        $this->comment=htmlspecialchars(strip_tags($this->comment));   
     
         $stmt->bindParam(":contatto_id", $this->contatto_id);
         $stmt->bindParam(":utente_id", $this->utente_id);
         $stmt->bindParam(":c_rating", $this->c_rating);
-        $stmt->bindParam(":udescription", $this->description);
+        $stmt->bindParam(":ucomment", $this->comment);
         $stmt->bindParam(":replay", $this->replay);
-        $stmt->bindParam(":enable_description", $this->enable_description);
+        $stmt->bindParam(":enable_comment", $this->enable_comment);
         $stmt->bindParam(":enable_replay", $this->enable_replay);
-        $stmt->bindParam(":reject_description", $this->reject_description);
+        $stmt->bindParam(":reject_comment", $this->reject_comment);
         $stmt->bindParam(":reject_replay", $this->reject_replay);
         $stmt->bindParam(":createddate", $this->createddate);	
         
@@ -188,11 +188,11 @@ class C_rating{
                       c_rating
                   SET               
                       c_rating=:c_rating,
-                      description=:description,
+                      comment=:comment,
                       replay=:replay,
-                      enable_description=:enable_description,
+                      enable_comment=:enable_comment,
                       enable_replay=:enable_replay,
-                      reject_description=:reject_description,
+                      reject_comment=:reject_comment,
                       reject_replay=:reject_replay
                   WHERE contatto_id = :contatto_id
                   AND utente_id= :utente_id";
@@ -201,17 +201,17 @@ class C_rating{
         $stmt = $this->conn->prepare($query);
     
         // sanitize
-        $this->email=htmlspecialchars(strip_tags($this->description));  
+        $this->email=htmlspecialchars(strip_tags($this->comment));  
     
         // bind new values
     
 
         $stmt->bindParam(":c_rating", $this->c_rating);
-        $stmt->bindParam(":description", $this->description);
+        $stmt->bindParam(":comment", $this->comment);
         $stmt->bindParam(":replay", $this->replay);
-        $stmt->bindParam(":enable_description", $this->enable_description);
+        $stmt->bindParam(":enable_comment", $this->enable_comment);
         $stmt->bindParam(":enable_replay", $this->enable_replay);
-        $stmt->bindParam(":reject_description", $this->reject_description);
+        $stmt->bindParam(":reject_comment", $this->reject_comment);
         $stmt->bindParam(":reject_replay", $this->reject_replay);
         $stmt->bindParam(":contatto_id", $this->contatto_id);
         $stmt->bindParam(":utente_id", $this->utente_id);
@@ -253,11 +253,11 @@ class C_rating{
                  p.`contatto_id`,
                  p.`utente_id`,
                  p.`c_rating`,
-                 p.`description`,
+                 p.`comment`,
                  p.`replay`,
-                 p.`enable_description`,
+                 p.`enable_comment`,
                  p.`enable_replay`,
-                 p.`reject_description`,
+                 p.`reject_comment`,
                  p.`reject_replay`,
                  p.`createddate`,
                  p.`lastmodified`,
@@ -271,20 +271,20 @@ class C_rating{
             ";
         if($par == 'rating')
             {
-                $query .= " WHERE p.`enable_description` = 0 ";
-                $query .= " AND p.`reject_description` = 0 ";
+                $query .= " WHERE p.`enable_comment` = 0 ";
+                $query .= " AND p.`reject_comment` = 0 ";
                 $query .= " ORDER BY p.createddate DESC ";
             } 
         if($par == 'replay')
             {
-                $query .= " WHERE p.`enable_description` = 1 ";
+                $query .= " WHERE p.`enable_comment` = 1 ";
                 $query .= " AND p.`enable_replay` = 0 ";
                 $query .= " AND p.`reject_replay` = 0 ";
                 $query .= " ORDER BY p.createddate DESC ";
             } 
-         if($par == 'reject_description')
+         if($par == 'reject_comment')
             {
-                $query .= " WHERE p.`reject_description` = 1 ";
+                $query .= " WHERE p.`reject_comment` = 1 ";
                 $query .= " ORDER BY p.createddate DESC ";
             } 
          if($par == 'reject_replay')
@@ -312,11 +312,11 @@ class C_rating{
         // $row = $stmt->fetch(PDO::FETCH_ASSOC);
         return $stmt;
     }
-    function autorizza_description($c_rating_id){
+    function autorizza_comment($c_rating_id){
         $esito;
         // delete query
         $query = "UPDATE  c_rating 
-                    SET enable_description = 1 
+                    SET enable_comment = 1 
                  WHERE c_rating_id = :c_rating_id
                ;";
     
@@ -346,11 +346,11 @@ class C_rating{
     
         return false;
     }
-   function reject_description($c_rating_id){
+   function reject_comment($c_rating_id){
         $esito;
         // delete query
         $query = "UPDATE  c_rating 
-                    SET reject_description = 1 
+                    SET reject_comment = 1 
                  WHERE c_rating_id = :c_rating_id
                ;";
     
@@ -394,7 +394,7 @@ class C_rating{
         $stmt = $this->conn->prepare($query);
     
         // sanitize
-        $this->email=htmlspecialchars(strip_tags($this->description));  
+        $this->email=htmlspecialchars(strip_tags($this->comment));  
     
         // bind new values
     

@@ -27,7 +27,7 @@ if(isset($data->isTest) && $data->isTest)
 $c_rating = new C_rating($db);
   
 // delete the contatto_it
-echo $c_rating->autorizza_description($c_rating_id);
+echo $c_rating->autorizza_comment($c_rating_id);
   
 header("Location: rating_check.php");
 exit();

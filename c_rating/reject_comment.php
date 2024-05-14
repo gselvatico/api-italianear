@@ -27,7 +27,7 @@ if(isset($data->isTest) && $data->isTest)
 $c_rating = new C_rating($db);
   
 // modifica record
-echo $c_rating->reject_description($c_rating_id);
+echo $c_rating->reject_comment($c_rating_id);
   
 header("Location: rating_check.php");
 exit();
