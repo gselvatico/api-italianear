@@ -271,15 +271,15 @@ class C_rating{
             ";
         if($par == 'rating')
             {
-                $query .= " WHERE p.`enable_comment` = 0 ";
-                $query .= " AND p.`reject_comment` = 0 ";
+                $query .= " WHERE (p.`enable_comment` = 0 OR p.`enable_comment` IS NULL)";
+                $query .= " AND (p.`reject_comment` = 0  OR p.`reject_comment` IS NULL)";
                 $query .= " ORDER BY p.createddate DESC ";
             } 
         if($par == 'replay')
             {
                 $query .= " WHERE p.`enable_comment` = 1 ";
-                $query .= " AND p.`enable_replay` = 0 ";
-                $query .= " AND p.`reject_replay` = 0 ";
+                $query .= " AND (p.`enable_replay` = 0 OR P.`enable_replay` IS NULL)";
+                $query .= " AND (p.`reject_replay` = 0  OR p.`reject_replay` IS NULL)";
                 $query .= " ORDER BY p.createddate DESC ";
             } 
          if($par == 'reject_comment')
