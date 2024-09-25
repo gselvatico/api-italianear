@@ -9,8 +9,8 @@ header("Access-Control-Allow-Headers: Content-Type, Access-Control-Allow-Headers
 // get database connection
 include_once '../config/database.php';
   
-// instantiate log_it object
-include_once '../objects/log_it.php';
+// instantiate log_click_it object
+include_once '../objects/log_button_click_contatto_it.php';
 include_once '../config/apikey.php';
 
 $data = json_decode(file_get_contents("php://input"));
@@ -22,6 +22,7 @@ if (isset($data->api_key) && $data->api_key != ApiKey::$apiKey) {
     ); 
     return;
 }
+  
 $database = new Database();
 if(isset($data->isTest) && $data->isTest)
 {
@@ -30,40 +31,36 @@ if(isset($data->isTest) && $data->isTest)
     $db = $database->getConnection();  
 }
   
-$log_it = new Log_it($db);
+$log_click_it = new Log_button_click_contatto_it($db);
   
 // make sure data is not empty
-if( !empty($data->userID) 	
+if( !empty($data->utente_id) 	
 )
-{ // set log_it property values
+{ // set log_click_it property values
 
-    $log_it->userID=$data->userID;
-    $log_it->gps=$data->gps;
-    $log_it->lista_categorie=$data->lista_categorie;
-    $log_it->ricerca_gps=$data->ricerca_gps;
-    $log_it->localita = $data->localita ?? 'non specificata';
-    $log_it->lista_contatti=$data->lista_contatti;
-    $log_it->vers=$data->vers;
-    $log_it->so=$data->so;
+    $log_click_it->utente_id=$data->utente_id;
+    $log_click_it->contatto_id=$data->contatto_id;  
+    $log_click_it->tipo_click=$data->tipo_click;
+
   
-    // create the log_it
-    if($log_it->create()){
+    // create the log_click_it
+    if($log_click_it->create()){
   
         // set response code - 201 created
         http_response_code(201);
   
         // tell the user
-        echo json_encode(array("message" => "log_it was created."));
+        echo json_encode(array("message" => "log_click_it was created."));
     }
   
-    // if unable to create the log_it, tell the user
+    // if unable to create the log_click_it, tell the user
     else{
   
         // set response code - 503 service unavailable
         http_response_code(503);
   
         // tell the user
-        echo json_encode(array("message" => "Unable to create log_it."));
+        echo json_encode(array("message" => "Unable to create log_click_it."));
     }
 }
   
@@ -74,6 +71,6 @@ else{
     http_response_code(400);
   
     // tell the user
-    echo json_encode(array("message" => "Unable to create log_it. Data is incomplete."));
+    echo json_encode(array("message" => "Unable to create log_click_it. Data is incomplete."));
 }
 ?>
